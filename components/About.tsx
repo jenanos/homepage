@@ -1,6 +1,6 @@
 import Image from 'next/image'
 import React from 'react'
-import ProfileImg from '../public/assets/pb-jao-sh.png'
+import ProfileImg from '../public/pb-jao-sh.png'
 
 function About() {
     return (
