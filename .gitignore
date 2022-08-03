@@ -19,7 +19,8 @@
 .DS_Store
 *.pem
 
-/assets
+/public/assets
+/public/background
 
 # debug
 npm-debug.log*
