@@ -6,7 +6,7 @@ import React, { useRef } from "react";
 import { useGLTF } from "@react-three/drei";
 
 export function Model(props) {
-    const { nodes, materials } = useGLTF("/assets/my-island.glb");
+    const { nodes, materials } = useGLTF("/my-island.glb");
     return (
         <group {...props} dispose={null}>
             <group
@@ -19,19 +19,19 @@ export function Model(props) {
                         castShadow
                         receiveShadow
                         geometry={nodes.TV_2_0_1.geometry}
-                        material={materials.material_1}
-                    />
-                    <mesh
-                        castShadow
-                        receiveShadow
-                        geometry={nodes.TV_2_0_2.geometry}
                         material={materials.material}
                     />
                     <mesh
                         castShadow
                         receiveShadow
-                        geometry={nodes.TV_2_0_3.geometry}
+                        geometry={nodes.TV_2_0_2.geometry}
                         material={materials.material_2}
+                    />
+                    <mesh
+                        castShadow
+                        receiveShadow
+                        geometry={nodes.TV_2_0_3.geometry}
+                        material={materials["Material.009"]}
                     />
                 </group>
             </group>
@@ -85,7 +85,7 @@ export function Model(props) {
                 receiveShadow
                 geometry={nodes.Rock_1.geometry}
                 material={materials["Rock.002"]}
-                position={[8.09, 4.05, -6.71]}
+                position={[8.09, 3.6, -6.71]}
                 rotation={[-0.02, 0, -0.07]}
                 scale={2.6}
             />
@@ -233,7 +233,11 @@ export function Model(props) {
                     material={materials["LightOrange.003"]}
                 />
             </group>
-            <group position={[-8.23, 1.12, -11.85]} rotation={[-0.05, 0, 0.01]}>
+            <group
+                position={[-8.23, 1.12, -11.85]}
+                rotation={[-0.05, 0, 0.01]}
+                scale={1.22}
+            >
                 <mesh
                     castShadow
                     receiveShadow
@@ -388,7 +392,11 @@ export function Model(props) {
                     material={materials["Green.010"]}
                 />
             </group>
-            <group position={[7.55, 3.45, -9.85]} rotation={[-0.03, 0, 0.03]}>
+            <group
+                position={[7.55, 3.45, -9.85]}
+                rotation={[-0.03, 0, 0.03]}
+                scale={1.55}
+            >
                 <mesh
                     castShadow
                     receiveShadow
@@ -478,7 +486,7 @@ export function Model(props) {
                     material={materials["Green.013"]}
                 />
             </group>
-            <group position={[1.38, 1.2, 2.05]} rotation={[0, 0, -0.03]}>
+            <group position={[1.38, 1.2, 2.05]} rotation={[0, 0, -0.03]} scale={1.05}>
                 <mesh
                     castShadow
                     receiveShadow
@@ -620,7 +628,11 @@ export function Model(props) {
                     material={materials["Berry.002"]}
                 />
             </group>
-            <group position={[-8.92, 1.09, -7.71]} rotation={[0.02, 0, 0.08]}>
+            <group
+                position={[-8.92, 1.09, -7.71]}
+                rotation={[0.02, 0, 0.08]}
+                scale={1.6}
+            >
                 <mesh
                     castShadow
                     receiveShadow
@@ -672,6 +684,48 @@ export function Model(props) {
                     receiveShadow
                     geometry={nodes.Cylinder_2.geometry}
                     material={materials["Mushroom_Bottom.001"]}
+                />
+            </group>
+            <group
+                position={[-7.11, 1, 11.25]}
+                rotation={[-0.03, 0, 0.07]}
+                scale={1.58}
+            >
+                <mesh
+                    castShadow
+                    receiveShadow
+                    geometry={nodes.Cylinder003.geometry}
+                    material={materials["Wood.014"]}
+                />
+                <mesh
+                    castShadow
+                    receiveShadow
+                    geometry={nodes.Cylinder003_1.geometry}
+                    material={materials["Orange.007"]}
+                />
+                <mesh
+                    castShadow
+                    receiveShadow
+                    geometry={nodes.Cylinder003_2.geometry}
+                    material={materials["LightOrange.001"]}
+                />
+            </group>
+            <group
+                position={[1.84, 1.52, 11.69]}
+                rotation={[0.02, 0, 0.08]}
+                scale={1.32}
+            >
+                <mesh
+                    castShadow
+                    receiveShadow
+                    geometry={nodes.Cylinder005.geometry}
+                    material={materials["Wood.002"]}
+                />
+                <mesh
+                    castShadow
+                    receiveShadow
+                    geometry={nodes.Cylinder005_1.geometry}
+                    material={materials["Green.002"]}
                 />
             </group>
             <group
@@ -728,22 +782,6 @@ export function Model(props) {
                     material={materials.String}
                 />
             </group>
-            <mesh
-                castShadow
-                receiveShadow
-                geometry={nodes.Cube_Latern_01_M_0.geometry}
-                material={materials.Latern_01_M}
-                position={[-3.14, 3.2, 4.53]}
-                rotation={[0.03, 0.63, 0.06]}
-            />
-            <mesh
-                castShadow
-                receiveShadow
-                geometry={nodes.Cube_Latern_01_M_0001.geometry}
-                material={materials.Latern_01_M}
-                position={[-11.48, 2.82, 8.86]}
-                rotation={[0.04, 0, 0.04]}
-            />
             <group
                 position={[10.81, 1.85, 11.19]}
                 rotation={[0, -1.42, 0]}
@@ -774,6 +812,79 @@ export function Model(props) {
                     material={materials.desktop_parts}
                 />
             </group>
+            <group position={[-11.01, 2.82, 8.91]} rotation={[-0.05, 1.12, 0.09]}>
+                <mesh
+                    castShadow
+                    receiveShadow
+                    geometry={nodes.Cube_Latern_01_M_0_1.geometry}
+                    material={materials.Material}
+                />
+                <mesh
+                    castShadow
+                    receiveShadow
+                    geometry={nodes.Cube_Latern_01_M_0_2.geometry}
+                    material={materials["Material.005"]}
+                />
+                <mesh
+                    castShadow
+                    receiveShadow
+                    geometry={nodes.Cube_Latern_01_M_0_3.geometry}
+                    material={materials["Material.006"]}
+                />
+                <mesh
+                    castShadow
+                    receiveShadow
+                    geometry={nodes.Cube_Latern_01_M_0_4.geometry}
+                    material={materials["Material.007"]}
+                />
+                <mesh
+                    castShadow
+                    receiveShadow
+                    geometry={nodes.Cube_Latern_01_M_0_5.geometry}
+                    material={materials["Material.008"]}
+                />
+            </group>
+            <group position={[-6.29, 3.27, 1.72]} rotation={[-0.1, 1.25, 0.13]}>
+                <mesh
+                    castShadow
+                    receiveShadow
+                    geometry={nodes.Cube_Latern_01_M_0_1.geometry}
+                    material={materials.Material}
+                />
+                <mesh
+                    castShadow
+                    receiveShadow
+                    geometry={nodes.Cube_Latern_01_M_0_2.geometry}
+                    material={materials["Material.005"]}
+                />
+                <mesh
+                    castShadow
+                    receiveShadow
+                    geometry={nodes.Cube_Latern_01_M_0_3.geometry}
+                    material={materials["Material.006"]}
+                />
+                <mesh
+                    castShadow
+                    receiveShadow
+                    geometry={nodes.Cube_Latern_01_M_0_4.geometry}
+                    material={materials["Material.007"]}
+                />
+                <mesh
+                    castShadow
+                    receiveShadow
+                    geometry={nodes.Cube_Latern_01_M_0_5.geometry}
+                    material={materials["Material.008"]}
+                />
+            </group>
+            <mesh
+                castShadow
+                receiveShadow
+                geometry={nodes["Chair_-_low_poly"].geometry}
+                material={materials.Chair}
+                position={[-3.95, 4.37, -5.79]}
+                rotation={[-1.57, -0.01, -2.97]}
+                scale={0.26}
+            />
             <mesh
                 castShadow
                 receiveShadow
@@ -813,20 +924,20 @@ export function Model(props) {
             <mesh
                 castShadow
                 receiveShadow
+                geometry={nodes.Instrument_Guitar_Ultra_Low_Poly.geometry}
+                material={materials.Meshessipropinstrumentguitar041Mtl}
+                position={[-4.02, 4.6, -5.55]}
+                rotation={[-0.73, 0.14, 0.99]}
+                scale={0.13}
+            />
+            <mesh
+                castShadow
+                receiveShadow
                 geometry={nodes["Low_Poly,_Old-Style_Couch"].geometry}
                 material={materials["Material.001"]}
                 position={[10.85, 1.51, 9.66]}
                 rotation={[-3, 1.13, 3.02]}
                 scale={[0.77, 0.03, 0.26]}
-            />
-            <mesh
-                castShadow
-                receiveShadow
-                geometry={nodes.Instrument_Guitar_Ultra_Low_Poly.geometry}
-                material={materials.Meshessipropinstrumentguitar041Mtl}
-                position={[-4.25, 4.62, -6.77]}
-                rotation={[-0.73, 0.14, 0.99]}
-                scale={0.13}
             />
             <group
                 position={[4.89, 3.57, -2.06]}
