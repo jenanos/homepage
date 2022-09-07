@@ -93,25 +93,24 @@ you may at your option offer warranty protection in exchange for a fee.
    distribute such modifications or work under the terms of Section 1
    above, provided that you also meet all of these conditions:
 
+   a) You must cause the modified files to carry prominent notices
+   stating that you changed the files and the date of any change.
 
-    a) You must cause the modified files to carry prominent notices
-    stating that you changed the files and the date of any change.
+   b) You must cause any work that you distribute or publish, that in
+   whole or in part contains or is derived from the Program or any
+   part thereof, to be licensed as a whole at no charge to all third
+   parties under the terms of this License.
 
-    b) You must cause any work that you distribute or publish, that in
-    whole or in part contains or is derived from the Program or any
-    part thereof, to be licensed as a whole at no charge to all third
-    parties under the terms of this License.
-
-    c) If the modified program normally reads commands interactively
-    when run, you must cause it, when started running for such
-    interactive use in the most ordinary way, to print or display an
-    announcement including an appropriate copyright notice and a
-    notice that there is no warranty (or else, saying that you provide
-    a warranty) and that users may redistribute the program under
-    these conditions, and telling the user how to view a copy of this
-    License.  (Exception: if the Program itself is interactive but
-    does not normally print such an announcement, your work based on
-    the Program is not required to print an announcement.)
+   c) If the modified program normally reads commands interactively
+   when run, you must cause it, when started running for such
+   interactive use in the most ordinary way, to print or display an
+   announcement including an appropriate copyright notice and a
+   notice that there is no warranty (or else, saying that you provide
+   a warranty) and that users may redistribute the program under
+   these conditions, and telling the user how to view a copy of this
+   License. (Exception: if the Program itself is interactive but
+   does not normally print such an announcement, your work based on
+   the Program is not required to print an announcement.)
 
 These requirements apply to the modified work as a whole. If
 identifiable sections of that work are not derived from the Program,
@@ -137,23 +136,22 @@ the scope of this License.
    under Section 2) in object code or executable form under the terms of
    Sections 1 and 2 above provided that you also do one of the following:
 
+   a) Accompany it with the complete corresponding machine-readable
+   source code, which must be distributed under the terms of Sections
+   1 and 2 above on a medium customarily used for software interchange; or,
 
-    a) Accompany it with the complete corresponding machine-readable
-    source code, which must be distributed under the terms of Sections
-    1 and 2 above on a medium customarily used for software interchange; or,
+   b) Accompany it with a written offer, valid for at least three
+   years, to give any third party, for a charge no more than your
+   cost of physically performing source distribution, a complete
+   machine-readable copy of the corresponding source code, to be
+   distributed under the terms of Sections 1 and 2 above on a medium
+   customarily used for software interchange; or,
 
-    b) Accompany it with a written offer, valid for at least three
-    years, to give any third party, for a charge no more than your
-    cost of physically performing source distribution, a complete
-    machine-readable copy of the corresponding source code, to be
-    distributed under the terms of Sections 1 and 2 above on a medium
-    customarily used for software interchange; or,
-
-    c) Accompany it with the information you received as to the offer
-    to distribute corresponding source code.  (This alternative is
-    allowed only for noncommercial distribution and only if you
-    received the program in object code or executable form with such
-    an offer, in accord with Subsection b above.)
+   c) Accompany it with the information you received as to the offer
+   to distribute corresponding source code. (This alternative is
+   allowed only for noncommercial distribution and only if you
+   received the program in object code or executable form with such
+   an offer, in accord with Subsection b above.)
 
 The source code for a work means the preferred form of the work for
 making modifications to it. For an executable work, complete source
@@ -341,4 +339,16 @@ consider it more useful to permit linking proprietary applications with the
 library. If this is what you want to do, use the GNU Lesser General
 Public License instead of this License.
 
-Additional licensing information on models used in the repository:
+ADDITIONAL LICENSING INFORMATION ON MODELS USED IN THE REPOSITORY:
+
+"Low Poly Coffee table" (https://sketchfab.com/3d-models/low-poly-coffee-table-b864f06947ed4f8da02d4c4f382015f7): created by https://sketchfab.com/Bushuev_Alex under the CC BY 4.0. Small changes has been made with removing the coffee-cups. Decimated model.
+"Low Poly, Old-Style Couch" (https://sketchfab.com/3d-models/low-poly-old-style-couch-cc54cf1425494025b030730d2986c515): created by https://sketchfab.com/itslerm under the CC BY 4.0. Decimated model.
+"Television (Low poly)" (https://sketchfab.com/3d-models/television-low-poly-227ee72a3db146d29436f611f2ba4115) created by https://sketchfab.com/Sharzc under the CC BY 4.0. Decimated model.
+"Low Poly Gaming Computer" (https://sketchfab.com/3d-models/low-poly-gaming-computer-a37c4792ad7142b88599aa4f7251f4a8) created by https://sketchfab.com/digitalisreality under the CC BY 4.0. Decimated model.
+"Monitor" (https://sketchfab.com/3d-models/monitor-0f3d348a29c14242bf79d0560f027af1) created by https://sketchfab.com/valeriydeynecaunder the CC BY 4.0. Decimated model.
+"Handpainted ladder" (https://sketchfab.com/3d-models/handpainted-ladder-ef57a6cdfdbc46b49ddf3d3e3d9c9c05) created by https://sketchfab.com/FabianvanDorst under the CC BY 4.0. Changed texture. Decimated model.
+"Low poly Latern Streetlight" (https://sketchfab.com/3d-models/low-poly-latern-streetlight-e22a9ed5964c4c7f9a2bde3dc684cfc2) created by https://sketchfab.com/Error1337 under the CC-BY-non-commercial. Decimated model.
+"Instrument Guitar Ultra Low Poly" (https://sketchfab.com/3d-models/instrument-guitar-ultra-low-poly-6ae97568d37b4cb192177851da8606ef) created by https://sketchfab.com/Maxime66410 under the CC BY 4.0. Decimated model.
+"Low Poly Watchtower" (https://sketchfab.com/3d-models/low-poly-watchtower-3f7bf371719d4404bd691173df51b5b0) created by https://sketchfab.com/RedrySols under the CC BY 4.0. Removed target and arrows. Decimated model.
+"Low Poly Computer Desk" (https://sketchfab.com/3d-models/low-poly-computer-desk-646ed84ecd9d40089c31d94f79334ca5) created by https://sketchfab.com/Nyangire under the CC BY 4.0 Removed all smaller objects from desk. Decimated model.
+"Chair - low poly" (https://sketchfab.com/3d-models/chair-low-poly-fc35ea02b05e4b1dbd1774361b7bcaf8) created by https://sketchfab.com/Ellemieke25 under the CC BY 4.0. Decimated model.
