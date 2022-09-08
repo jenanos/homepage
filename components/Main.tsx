@@ -6,7 +6,7 @@ import { Model } from './Model';
 export const Main = () => {
     return (
         <div className='w-full h-screen text-center'>
-            <Canvas>
+            <Canvas camera={{ position: [-20, 5, 20] }}>
                 <ambientLight intensity={0.03} />
                 <pointLight color="orange" intensity={1} position={[-11.4, 2.8, 8.8]} distance={8} />
                 <pointLight color="orange" intensity={1} position={[-3.2, 3, 4.5]} distance={8} />
