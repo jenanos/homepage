@@ -1,6 +1,6 @@
 import React from 'react'
 import { Canvas } from '@react-three/fiber'
-import { Environment, OrbitControls, Text3D } from '@react-three/drei';
+import { Environment, OrbitControls, Text3D, Loader } from '@react-three/drei';
 import { Model } from './Model';
 
 export const Main = () => {
@@ -29,6 +29,7 @@ export const Main = () => {
                     background
                 />
             </Canvas>
+            <Loader />
         </div>
     )
 }
