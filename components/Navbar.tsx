@@ -6,7 +6,7 @@ import { AiOutlineClose, AiOutlineMail, AiOutlineMenu } from 'react-icons/ai';
 import { FaGithub, FaLinkedinIn } from 'react-icons/fa';
 import { BsFillPersonLinesFill } from 'react-icons/bs';
 
-const Navbar = () => {
+function Navbar({ cameraPosition, setCameraPosition }) {
   const [nav, setNav] = useState(false);
   const [navBg, setNavBg] = useState('#ecf0f3');
   const [shadow, setShadow] = useState(false);
@@ -26,6 +26,8 @@ const Navbar = () => {
     window.addEventListener('scroll', handleShadow);
   }, []);
 
+
+
   return (
     <div
       style={{ backgroundColor: `${navBg}` }}
@@ -37,27 +39,20 @@ const Navbar = () => {
     >
 
       <div className="flex justify-between items-center w-full h-full p-2 2xl:px-16">
-        <Link href='/'>
-          <a>
-            <Image
-              src={NavImg}
-              alt='Icon av Jens'
-              height='60'
-              width='150'
-              className="cursor-pointer" />
-          </a>
-        </Link>
+        <Image
+          src={NavImg}
+          alt='Icon av Jens'
+          height='60'
+          width='150'
+          className="cursor-pointer"
+          onClick={() => setCameraPosition(1)} />
         <div>
           <ul className="hidden md:flex">
-            <li className="ml-10 text-sm uppercase hover:border-b">
-              <Link href='/'>
-                Om meg
-              </Link>
+            <li onClick={() => setCameraPosition(2)} className="ml-10 text-sm uppercase hover:border-b">
+              Om meg
             </li>
-            <li className="ml-10 text-sm uppercase hover:border-b">
-              <Link href='/'>
-                Juss
-              </Link>
+            <li onClick={() => setCameraPosition(3)} className="ml-10 text-sm uppercase hover:border-b">
+              Juss
             </li>
             <li className="ml-10 text-sm uppercase hover:border-b">
               <Link href='/'>

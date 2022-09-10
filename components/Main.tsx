@@ -4,32 +4,16 @@ import { Environment, OrbitControls, Text3D, Loader, PerspectiveCamera } from '@
 import { Model } from './Model';
 
 
-function Main() {
-    const [clickedHome, updateHome] = useState(false);
-    // const [cameraPosition, updateCameraPosition] = useState([-20, 5, 20]);
-
-    let tekst;
-    if (clickedHome) {
-        {/* @ts-ignore*/ }
-        tekst = < Text3D font={'/Roboto_Medium_Regular.json'} position={[-6, 10, 5]} rotation={[0, -0.5, 0]} >
-            Hei, jeg er Jens!
-            < meshNormalMaterial />
-        </Text3D >
-    }
-    else {
-        {/* @ts-ignore*/ }
-        tekst = < Text3D font={'/Roboto_Medium_Regular.json'} position={[-6, 10, 5]} rotation={[0, -0.5, 0]} >
-            Hei, jeg er Jensebas!
-            < meshNormalMaterial />
-        </Text3D >
-    }
-
+function Main({ cameraPosition }) {
     let camera;
-    if (clickedHome) {
+    if (cameraPosition === 1) {
         camera = <PerspectiveCamera makeDefault fov={75} position={[-20, 5, 20]} />
     }
-    else {
+    else if (cameraPosition === 2) {
         camera = <PerspectiveCamera makeDefault fov={75} position={[-10, 5, 20]} />
+    }
+    else if (cameraPosition === 3) {
+        camera = <PerspectiveCamera makeDefault fov={75} position={[-5, 5, 20]} />
     }
 
     return (
@@ -41,9 +25,8 @@ function Main() {
                 <pointLight color="orange" intensity={1} position={[-3.2, 3, 4.5]} distance={8} />
                 <pointLight color="orange" intensity={1} position={[3.6, 4, -1]} distance={2} />
                 <pointLight color="white" intensity={1} position={[12.3, 1.9, 8.9]} distance={8} />
-                {tekst}
                 {/* @ts-ignore*/}
-                <Text3D font={'/Roboto_Medium_Regular.json'} position={[-10, 8, 0]} rotation={[0, -0.5, 0]} onClick={() => updateHome(!clickedHome)}>
+                <Text3D font={'/Roboto_Medium_Regular.json'} position={[-10, 8, 0]} rotation={[0, -0.5, 0]}>
                     Hjemmesiden min er under arbeid!
                     <meshNormalMaterial />
                 </Text3D>
