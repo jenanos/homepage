@@ -57,13 +57,13 @@ function Navbar({ cameraPosition, setCameraPosition }) {
             <li onClick={() => setCameraPosition(3)} className="ml-10 text-sm uppercase hover:border-b">
               Juss
             </li>
-            <li onClick={() => setCameraPosition(3)} className="ml-10 text-sm uppercase hover:border-b">
+            <li onClick={() => setCameraPosition(4)} className="ml-10 text-sm uppercase hover:border-b">
               Teknologi
             </li>
-            <li onClick={() => setCameraPosition(3)} className="ml-10 text-sm uppercase hover:border-b">
+            <li onClick={() => setCameraPosition(5)} className="ml-10 text-sm uppercase hover:border-b">
               Musikk
             </li>
-            <li onClick={() => setCameraPosition(3)} className="ml-10 text-sm uppercase hover:border-b">
+            <li onClick={() => setCameraPosition(6)} className="ml-10 text-sm uppercase hover:border-b">
               Ta kontakt
             </li>
           </ul>
@@ -115,16 +115,16 @@ function Navbar({ cameraPosition, setCameraPosition }) {
           </div>
           <div className="py-4 flex flex-col">
             <ul className="uppercase">
-              <li onClick={() => setCameraAndCloseNav(1)} className='py-4 text-sm'>
+              <li onClick={() => setCameraAndCloseNav(2)} className='py-4 text-sm'>
                 Om meg
               </li>
-              <li onClick={() => setCameraAndCloseNav(1)} className='py-4 text-sm'>
+              <li onClick={() => setCameraAndCloseNav(3)} className='py-4 text-sm'>
                 Juss
               </li>
-              <li onClick={() => setCameraAndCloseNav(1)} className='py-4 text-sm'>
+              <li onClick={() => setCameraAndCloseNav(4)} className='py-4 text-sm'>
                 Teknologi
               </li>
-              <li onClick={() => setCameraAndCloseNav(1)} className='py-4 text-sm'>
+              <li onClick={() => setCameraAndCloseNav(5)} className='py-4 text-sm'>
                 Musikk
               </li>
             </ul>
