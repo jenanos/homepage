@@ -6,7 +6,7 @@ import { AiOutlineClose, AiOutlineMail, AiOutlineMenu } from 'react-icons/ai';
 import { FaGithub, FaLinkedinIn } from 'react-icons/fa';
 import { BsFillPersonLinesFill } from 'react-icons/bs';
 
-const Navbar = () => {
+function Navbar({ cameraPosition, setCameraPosition }) {
   const [nav, setNav] = useState(false);
   const [navBg, setNavBg] = useState('#ecf0f3');
   const [shadow, setShadow] = useState(false);
@@ -26,6 +26,11 @@ const Navbar = () => {
     window.addEventListener('scroll', handleShadow);
   }, []);
 
+  function setCameraAndCloseNav(cameraNumber: number) {
+    setCameraPosition(cameraNumber);
+    setNav(false);
+  }
+
   return (
     <div
       style={{ backgroundColor: `${navBg}` }}
@@ -37,37 +42,29 @@ const Navbar = () => {
     >
 
       <div className="flex justify-between items-center w-full h-full p-2 2xl:px-16">
-        <Link href='/'>
-          <a>
-            <Image
-              src={NavImg}
-              alt='Icon av Jens'
-              height='60'
-              width='150'
-              className="cursor-pointer" />
-          </a>
-        </Link>
+        <Image
+          src={NavImg}
+          alt='Icon av Jens'
+          height='60'
+          width='150'
+          className="cursor-pointer"
+          onClick={() => setCameraPosition(1)} />
         <div>
           <ul className="hidden md:flex">
-            <li className="ml-10 text-sm uppercase hover:border-b">
-              <Link href='/'>
-                Om meg
-              </Link>
+            <li onClick={() => setCameraPosition(2)} className="ml-10 text-sm uppercase hover:border-b">
+              Om meg
             </li>
-            <li className="ml-10 text-sm uppercase hover:border-b">
-              <Link href='/'>
-                Juss
-              </Link>
+            <li onClick={() => setCameraPosition(3)} className="ml-10 text-sm uppercase hover:border-b">
+              Juss
             </li>
-            <li className="ml-10 text-sm uppercase hover:border-b">
-              <Link href='/'>
-                Teknologi
-              </Link>
+            <li onClick={() => setCameraPosition(3)} className="ml-10 text-sm uppercase hover:border-b">
+              Teknologi
             </li>
-            <li className="ml-10 text-sm uppercase hover:border-b">
-              <Link href='/'>
-                Prosjekter
-              </Link>
+            <li onClick={() => setCameraPosition(3)} className="ml-10 text-sm uppercase hover:border-b">
+              Musikk
+            </li>
+            <li onClick={() => setCameraPosition(3)} className="ml-10 text-sm uppercase hover:border-b">
+              Ta kontakt
             </li>
           </ul>
           <div
@@ -118,26 +115,18 @@ const Navbar = () => {
           </div>
           <div className="py-4 flex flex-col">
             <ul className="uppercase">
-              <Link href='/a'>
-                <li onClick={() => setNav(false)} className='py-4 text-sm'>
-                  Om meg
-                </li>
-              </Link>
-              <Link href='/b'>
-                <li onClick={() => setNav(false)} className='py-4 text-sm'>
-                  Om meg
-                </li>
-              </Link>
-              <Link href='/c'>
-                <li onClick={() => setNav(false)} className='py-4 text-sm'>
-                  Om meg
-                </li>
-              </Link>
-              <Link href='/'>
-                <li onClick={() => setNav(false)} className='py-4 text-sm'>
-                  Om meg
-                </li>
-              </Link>
+              <li onClick={() => setCameraAndCloseNav(1)} className='py-4 text-sm'>
+                Om meg
+              </li>
+              <li onClick={() => setCameraAndCloseNav(1)} className='py-4 text-sm'>
+                Juss
+              </li>
+              <li onClick={() => setCameraAndCloseNav(1)} className='py-4 text-sm'>
+                Teknologi
+              </li>
+              <li onClick={() => setCameraAndCloseNav(1)} className='py-4 text-sm'>
+                Musikk
+              </li>
             </ul>
             <div className='pt-40'>
               <p className='uppercase tracking-widest text-[#561e5]'>
@@ -146,7 +135,7 @@ const Navbar = () => {
               <div className="flex items-center justify-between my-4 w-full sm:w-[80%]">
 
                 <a
-                  href="https://google.com"
+                  href="https://www.linkedin.com/in/jens-andresen-osberg-2a09ba99/"
                   target='_blank'
                   rel="noreferrer"
                 >
@@ -156,7 +145,7 @@ const Navbar = () => {
 
                 </a>
                 <a
-                  href="https://google.com"
+                  href="https://github.com/jenanos"
                   target='_blank'
                   rel="noreferrer"
                 >
@@ -165,22 +154,18 @@ const Navbar = () => {
                   </div>
 
                 </a>
-                <Link href='/#contact'>
+                <a
+                  href="mailto:jens.osberg@gmail.com"
+                  target='_blank'
+                  rel="noreferrer"
+                >
                   <div
                     onClick={() => setNav(!nav)}
                     className='rounded-full shadow-lg shadow-gray-400 p-3 cursor-pointer hover:scale-105 ease-in duration-300'
                   >
                     <AiOutlineMail />
                   </div>
-                </Link>
-                <Link href='/resume'>
-                  <div
-                    onClick={() => setNav(!nav)}
-                    className='rounded-full shadow-lg shadow-gray-400 p-3 cursor-pointer hover:scale-105 ease-in duration-300'
-                  >
-                    <BsFillPersonLinesFill />
-                  </div>
-                </Link>
+                </a>
               </div>
             </div>
           </div>
