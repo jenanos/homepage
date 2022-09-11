@@ -1,28 +1,49 @@
 import React, { useState } from 'react'
-import { Canvas } from '@react-three/fiber'
-import { Environment, OrbitControls, Text3D, Loader, PerspectiveCamera } from '@react-three/drei';
+import { Canvas, useThree } from '@react-three/fiber'
+import { Environment, OrbitControls, Text3D, Loader, PerspectiveCamera, Text, Billboard } from '@react-three/drei';
 import { Model } from './Model';
 
 
-function Main({ cameraPosition }) {
-    let camera;
+function ChangeCamera({ cameraPosition }) {
+    const camera = useThree((state) => state.camera)
+    let orbitPoint;
     if (cameraPosition === 1) {
-        camera = <PerspectiveCamera makeDefault fov={75} position={[-20, 5, 20]} />
+        camera.position.set(-20, 5, 20);
+        camera.lookAt(0, 0, 0);
+        orbitPoint = [0, 0, 0];
     }
     else if (cameraPosition === 2) {
-        camera = <PerspectiveCamera makeDefault fov={75} position={[-10, 5, 20]} />
+        camera.position.set(-12, 3, 13);
+        camera.lookAt(0, 0, 0);
+        orbitPoint = [0, 0, 0];
     }
     else if (cameraPosition === 3) {
-        camera = <PerspectiveCamera makeDefault fov={75} position={[-5, 5, 20]} />
+        camera.position.set(0.6, 5.3, -4.6);
+        camera.lookAt(3.5, 3.5, -1);
+        orbitPoint = [3.5, 3.5, -1];
+    }
+    else if (cameraPosition === 4) {
+        camera.position.set(8, 2.0, 10);
+        camera.lookAt(14, 2, 10);
+        orbitPoint = [14, 2, 10];
+    }
+    else if (cameraPosition === 5) {
+        camera.position.set(-7, 5.5, -0.2);
+        camera.lookAt(-4, 4.6, -5.5);
+        orbitPoint = [-4, 4.6, -5.5];
     }
 
+    return <OrbitControls target={orbitPoint} />
+}
+
+
+
+function Main({ cameraPosition }) {
     return (
         <div className='w-full h-screen text-center'>
             <Canvas>
-                {camera}
-                <ambientLight intensity={0.03} />
-                <pointLight color="orange" intensity={1} position={[-11.4, 2.8, 8.8]} distance={8} />
-                <pointLight color="orange" intensity={1} position={[-3.2, 3, 4.5]} distance={8} />
+                <pointLight color="orange" intensity={1} position={[-11., 2.8, 8.9]} distance={8} />
+                <pointLight color="orange" intensity={1} position={[-6.2, 3.2, 1.7]} distance={8} />
                 <pointLight color="orange" intensity={1} position={[3.6, 4, -1]} distance={2} />
                 <pointLight color="white" intensity={1} position={[12.3, 1.9, 8.9]} distance={8} />
                 {/* @ts-ignore*/}
@@ -35,9 +56,28 @@ function Main({ cameraPosition }) {
                     Hjemmesiden min er under arbeid!
                     <meshNormalMaterial />
                 </Text3D>
+                <Billboard position={[-10, 3, 11]}>
+                    <Text color={'white'} maxWidth={2}>
+                        Hei, jeg er Jens! Jurist og teknolog. Jobber som seniorrådgiver om dagen. Spiller gitar og koder om natten.
+                    </Text>
+                </Billboard>
+                <Billboard position={[3.5, 5, -1]}>
+                    <Text color={'white'} maxWidth={2}>
+                        Utdannet jurist med master i rettsvitenskap fra UiO. Jobber med EU-juss, og særlig personvern. Ekspert på Schrems II og bruk av skytjenester.
+                    </Text>
+                </Billboard>
+                <Billboard position={[10, 2.5, 10]}>
+                    <Text color={'yellow'} maxWidth={2}>
+                        Utdannet teknolog med en bachelor i programmering og systemarkitektur fra UiO. Er spesialisert på nettverk- og kommunikasjonssikkerhet. Denne siden er laget med Next.js, React, Tailwind, og Three.js. Modellen er laget i Blender.
+                    </Text>
+                </Billboard>
+                <Billboard position={[-4, 4.6, -3.5]}>
+                    <Text color={'white'} maxWidth={2}>
+                        Spiller gitar i bandet Gete. Vi er der du strømmer musikk!
+                    </Text>
+                </Billboard>
                 <Model />
-
-                <OrbitControls />
+                <ChangeCamera cameraPosition={cameraPosition} />
                 <Environment
                     files="dikhololo_night_1k.hdr"
                     background
