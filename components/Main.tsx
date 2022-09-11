@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { Canvas } from '@react-three/fiber'
-import { Environment, OrbitControls, Text3D, Loader, PerspectiveCamera } from '@react-three/drei';
+import { Environment, OrbitControls, Text3D, Loader, PerspectiveCamera, Billboard, Text, Html } from '@react-three/drei';
 import { Model } from './Model';
 
 
@@ -30,7 +30,19 @@ function Main({ cameraPosition }) {
                     Hjemmesiden min er under arbeid!
                     <meshNormalMaterial />
                 </Text3D>
+                <Billboard
+                    follow={true}
+                    lockX={false}
+                    lockY={false}
+                    lockZ={false} // Lock the rotation on the z axis (default=false)
+                    position={[0, -15, 0]}>
+                    <Html>
+                        <h1>hello</h1>
+                        <p>world</p>
+                    </Html>
+                </Billboard>
                 <Model />
+
                 <OrbitControls />
                 <Environment
                     files="dikhololo_night_1k.hdr"

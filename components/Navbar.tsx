@@ -26,7 +26,10 @@ function Navbar({ cameraPosition, setCameraPosition }) {
     window.addEventListener('scroll', handleShadow);
   }, []);
 
-
+  function setCameraAndCloseNav(cameraNumber: number) {
+    setCameraPosition(cameraNumber);
+    setNav(false);
+  }
 
   return (
     <div
@@ -54,15 +57,14 @@ function Navbar({ cameraPosition, setCameraPosition }) {
             <li onClick={() => setCameraPosition(3)} className="ml-10 text-sm uppercase hover:border-b">
               Juss
             </li>
-            <li className="ml-10 text-sm uppercase hover:border-b">
-              <Link href='/'>
-                Teknologi
-              </Link>
+            <li onClick={() => setCameraPosition(3)} className="ml-10 text-sm uppercase hover:border-b">
+              Teknologi
             </li>
-            <li className="ml-10 text-sm uppercase hover:border-b">
-              <Link href='/'>
-                Prosjekter
-              </Link>
+            <li onClick={() => setCameraPosition(3)} className="ml-10 text-sm uppercase hover:border-b">
+              Musikk
+            </li>
+            <li onClick={() => setCameraPosition(3)} className="ml-10 text-sm uppercase hover:border-b">
+              Ta kontakt
             </li>
           </ul>
           <div
@@ -113,26 +115,18 @@ function Navbar({ cameraPosition, setCameraPosition }) {
           </div>
           <div className="py-4 flex flex-col">
             <ul className="uppercase">
-              <Link href='/a'>
-                <li onClick={() => setNav(false)} className='py-4 text-sm'>
-                  Om meg
-                </li>
-              </Link>
-              <Link href='/b'>
-                <li onClick={() => setNav(false)} className='py-4 text-sm'>
-                  Om meg
-                </li>
-              </Link>
-              <Link href='/c'>
-                <li onClick={() => setNav(false)} className='py-4 text-sm'>
-                  Om meg
-                </li>
-              </Link>
-              <Link href='/'>
-                <li onClick={() => setNav(false)} className='py-4 text-sm'>
-                  Om meg
-                </li>
-              </Link>
+              <li onClick={() => setCameraAndCloseNav(1)} className='py-4 text-sm'>
+                Om meg
+              </li>
+              <li onClick={() => setCameraAndCloseNav(1)} className='py-4 text-sm'>
+                Juss
+              </li>
+              <li onClick={() => setCameraAndCloseNav(1)} className='py-4 text-sm'>
+                Teknologi
+              </li>
+              <li onClick={() => setCameraAndCloseNav(1)} className='py-4 text-sm'>
+                Musikk
+              </li>
             </ul>
             <div className='pt-40'>
               <p className='uppercase tracking-widest text-[#561e5]'>
@@ -141,7 +135,7 @@ function Navbar({ cameraPosition, setCameraPosition }) {
               <div className="flex items-center justify-between my-4 w-full sm:w-[80%]">
 
                 <a
-                  href="https://google.com"
+                  href="https://www.linkedin.com/in/jens-andresen-osberg-2a09ba99/"
                   target='_blank'
                   rel="noreferrer"
                 >
@@ -151,7 +145,7 @@ function Navbar({ cameraPosition, setCameraPosition }) {
 
                 </a>
                 <a
-                  href="https://google.com"
+                  href="https://github.com/jenanos"
                   target='_blank'
                   rel="noreferrer"
                 >
@@ -160,22 +154,18 @@ function Navbar({ cameraPosition, setCameraPosition }) {
                   </div>
 
                 </a>
-                <Link href='/#contact'>
+                <a
+                  href="mailto:jens.osberg@gmail.com"
+                  target='_blank'
+                  rel="noreferrer"
+                >
                   <div
                     onClick={() => setNav(!nav)}
                     className='rounded-full shadow-lg shadow-gray-400 p-3 cursor-pointer hover:scale-105 ease-in duration-300'
                   >
                     <AiOutlineMail />
                   </div>
-                </Link>
-                <Link href='/resume'>
-                  <div
-                    onClick={() => setNav(!nav)}
-                    className='rounded-full shadow-lg shadow-gray-400 p-3 cursor-pointer hover:scale-105 ease-in duration-300'
-                  >
-                    <BsFillPersonLinesFill />
-                  </div>
-                </Link>
+                </a>
               </div>
             </div>
           </div>
