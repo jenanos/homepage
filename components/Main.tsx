@@ -69,7 +69,12 @@ function Main({ cameraPosition }) {
                 </Billboard>
                 <Billboard position={[10, 2.5, 10]}>
                     <Text color={'yellow'} maxWidth={2}>
-                        Utdannet teknolog med en bachelor i programmering og systemarkitektur fra UiO. Er spesialisert på nettverk- og kommunikasjonssikkerhet. Denne siden er laget med Next.js, React, Tailwind, og Three.js. Modellen er laget i Blender.
+                        Utdannet teknolog med en bachelor i programmering og systemarkitektur fra UiO. Spesialisert på nettverk- og kommunikasjonssikkerhet.
+                    </Text>
+                </Billboard>
+                <Billboard position={[10, 1.5, 11]}>
+                    <Text color={'yellow'} maxWidth={2}>
+                        Denne siden er laget med Next.js, React, Tailwind, og Three.js. Modellen er laget i Blender.
                     </Text>
                 </Billboard>
                 <Billboard position={[-4, 4.6, -3.5]}>

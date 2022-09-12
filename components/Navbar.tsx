@@ -63,8 +63,14 @@ function Navbar({ cameraPosition, setCameraPosition }) {
             <li onClick={() => setCameraPosition(5)} className="ml-10 text-sm uppercase hover:border-b">
               Musikk
             </li>
-            <li onClick={() => setCameraPosition(6)} className="ml-10 text-sm uppercase hover:border-b">
-              Ta kontakt
+            <li className="ml-10 text-sm uppercase hover:border-b">
+              <a
+                href="https://www.linkedin.com/in/jens-andresen-osberg-2a09ba99/"
+                target='_blank'
+                rel="noreferrer"
+              >
+                Ta kontakt
+              </a>
             </li>
           </ul>
           <div
@@ -109,7 +115,7 @@ function Navbar({ cameraPosition, setCameraPosition }) {
             </div>
             <div className="border-b border-gray-300 my-4">
               <p className="w-[85%] md:w-[90%] py-4">
-                Slagordet til Jens
+                Jurist og teknolog
               </p>
             </div>
           </div>
