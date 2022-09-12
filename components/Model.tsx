@@ -671,19 +671,19 @@ export function Model(props) {
                 <mesh
                     castShadow
                     receiveShadow
-                    geometry={nodes.Cylinder.geometry}
+                    geometry={nodes.Cylinder_1.geometry}
                     material={materials["Wood.012"]}
                 />
                 <mesh
                     castShadow
                     receiveShadow
-                    geometry={nodes.Cylinder_1.geometry}
+                    geometry={nodes.Cylinder_2.geometry}
                     material={materials["Mushroom_Top.001"]}
                 />
                 <mesh
                     castShadow
                     receiveShadow
-                    geometry={nodes.Cylinder_2.geometry}
+                    geometry={nodes.Cylinder_3.geometry}
                     material={materials["Mushroom_Bottom.001"]}
                 />
             </group>
@@ -783,6 +783,15 @@ export function Model(props) {
                     material={materials.String}
                 />
             </group>
+            <mesh
+                castShadow
+                receiveShadow
+                geometry={nodes.Handpainted_ladder.geometry}
+                material={materials["Material.010"]}
+                position={[1.63, 2.76, -3.05]}
+                rotation={[1.55, 0, -0.1]}
+                scale={0}
+            />
             <group
                 position={[10.81, 1.85, 11.19]}
                 rotation={[0, -1.42, 0]}
@@ -889,6 +898,14 @@ export function Model(props) {
             <mesh
                 castShadow
                 receiveShadow
+                geometry={nodes.Cylinder.geometry}
+                material={materials["Black.001"]}
+                position={[-7.42, 2.16, 11.22]}
+                rotation={[0.39, -1.02, -1.37]}
+            />
+            <mesh
+                castShadow
+                receiveShadow
                 geometry={nodes.Office_desk_ComputerDesk_0.geometry}
                 material={materials.ComputerDesk}
                 position={[10.65, 1.61, 11.74]}
@@ -916,20 +933,20 @@ export function Model(props) {
             <mesh
                 castShadow
                 receiveShadow
+                geometry={nodes.Low_Poly_Lantern.geometry}
+                material={materials["LANTERN_MAT_FINAL.002"]}
+                position={[-3.37, 4.34, -5.49]}
+                rotation={[0.01, -1.34, -0.01]}
+                scale={0.06}
+            />
+            <mesh
+                castShadow
+                receiveShadow
                 geometry={nodes.Low_Poly_Coffee_table.geometry}
                 material={materials.base_color}
                 position={[13.26, 1.48, 8.68]}
                 rotation={[-0.13, -1.08, -0.1]}
                 scale={0.1}
-            />
-            <mesh
-                castShadow
-                receiveShadow
-                geometry={nodes.Instrument_Guitar_Ultra_Low_Poly.geometry}
-                material={materials.Meshessipropinstrumentguitar041Mtl}
-                position={[-4.02, 4.6, -5.55]}
-                rotation={[-0.73, 0.14, 0.99]}
-                scale={0.13}
             />
             <mesh
                 castShadow
@@ -940,9 +957,18 @@ export function Model(props) {
                 rotation={[-3, 1.13, 3.02]}
                 scale={[0.77, 0.03, 0.26]}
             />
+            <mesh
+                castShadow
+                receiveShadow
+                geometry={nodes.Instrument_Guitar_Ultra_Low_Poly.geometry}
+                material={materials.Meshessipropinstrumentguitar041Mtl}
+                position={[-4.02, 4.6, -5.55]}
+                rotation={[-0.73, 0.14, 0.99]}
+                scale={0.13}
+            />
             <group
-                position={[4.89, 3.57, -2.06]}
-                rotation={[-0.67, 1.49, 0.74]}
+                position={[3.31, 3.62, -3.01]}
+                rotation={[-0.09, 1.51, 0.16]}
                 scale={[0.15, 0.05, 0.1]}
             >
                 <mesh
@@ -964,15 +990,30 @@ export function Model(props) {
                     material={materials["Material.003"]}
                 />
             </group>
-            <mesh
-                castShadow
-                receiveShadow
-                geometry={nodes.Handpainted_ladder.geometry}
-                material={materials["Scene_-_Root"]}
-                position={[1.61, 2.64, -3.07]}
-                rotation={[1.55, 0, -0.1]}
-                scale={0}
-            />
+            <group
+                position={[-7.39, 1.99, 11.28]}
+                rotation={[-Math.PI, 1.06, -Math.PI]}
+                scale={[-0.24, -0.29, -0.02]}
+            >
+                <mesh
+                    castShadow
+                    receiveShadow
+                    geometry={nodes.Cube003.geometry}
+                    material={materials["Material.013"]}
+                />
+                <mesh
+                    castShadow
+                    receiveShadow
+                    geometry={nodes.Cube003_1.geometry}
+                    material={materials["Material.014"]}
+                />
+                <mesh
+                    castShadow
+                    receiveShadow
+                    geometry={nodes.Cube003_2.geometry}
+                    material={materials["Jens Osberg - farger"]}
+                />
+            </group>
             <mesh
                 castShadow
                 receiveShadow

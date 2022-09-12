@@ -13,9 +13,9 @@ function ChangeCamera({ cameraPosition }) {
         orbitPoint = [0, 0, 0];
     }
     else if (cameraPosition === 2) {
-        camera.position.set(-12, 3, 13);
-        camera.lookAt(0, 0, 0);
-        orbitPoint = [0, 0, 0];
+        camera.position.set(-9, 2.5, 14);
+        camera.lookAt(-10, 2, 10);
+        orbitPoint = [-8, 2, 10];
     }
     else if (cameraPosition === 3) {
         camera.position.set(0.6, 5.3, -4.6);
@@ -23,12 +23,12 @@ function ChangeCamera({ cameraPosition }) {
         orbitPoint = [3.5, 3.5, -1];
     }
     else if (cameraPosition === 4) {
-        camera.position.set(8, 2.0, 10);
-        camera.lookAt(14, 2, 10);
-        orbitPoint = [14, 2, 10];
+        camera.position.set(6, 2.0, 11);
+        camera.lookAt(10, 2, 9.6);
+        orbitPoint = [10, 2, 9.6];
     }
     else if (cameraPosition === 5) {
-        camera.position.set(-7, 5.5, -0.2);
+        camera.position.set(-6, 5.5, -2);
         camera.lookAt(-4, 4.6, -5.5);
         orbitPoint = [-4, 4.6, -5.5];
     }
@@ -44,7 +44,8 @@ function Main({ cameraPosition }) {
             <Canvas>
                 <pointLight color="orange" intensity={1} position={[-11., 2.8, 8.9]} distance={8} />
                 <pointLight color="orange" intensity={1} position={[-6.2, 3.2, 1.7]} distance={8} />
-                <pointLight color="orange" intensity={1} position={[3.6, 4, -1]} distance={2} />
+                <pointLight color="orange" intensity={1} position={[-3.3, 4.8, -5.4]} distance={2} />
+                <pointLight color="orange" intensity={1} position={[3.6, 4, -1]} distance={3} />
                 <pointLight color="white" intensity={1} position={[12.3, 1.9, 8.9]} distance={8} />
                 {/* @ts-ignore*/}
                 <Text3D font={'/Roboto_Medium_Regular.json'} position={[-6, 10, 5]} rotation={[0, -0.5, 0]}>
@@ -56,14 +57,14 @@ function Main({ cameraPosition }) {
                     Hjemmesiden min er under arbeid!
                     <meshNormalMaterial />
                 </Text3D>
-                <Billboard position={[-10, 3, 11]}>
+                <Billboard position={[-8, 1.5, 12]}>
                     <Text color={'white'} maxWidth={2}>
                         Hei, jeg er Jens! Jurist og teknolog. Jobber som seniorrådgiver om dagen. Spiller gitar og koder om natten.
                     </Text>
                 </Billboard>
                 <Billboard position={[3.5, 5, -1]}>
                     <Text color={'white'} maxWidth={2}>
-                        Utdannet jurist med master i rettsvitenskap fra UiO. Jobber med EU-juss, og særlig personvern. Ekspert på Schrems II og bruk av skytjenester.
+                        Utdannet jurist med master i rettsvitenskap fra UiO. Jobber med EU-juss, særlig personvern. Ekspert på Schrems II og bruk av skytjenester.
                     </Text>
                 </Billboard>
                 <Billboard position={[10, 2.5, 10]}>
