@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { Canvas, useThree } from '@react-three/fiber'
 import { Environment, OrbitControls, Text3D, Loader, PerspectiveCamera, Text, Billboard } from '@react-three/drei';
 import { Model } from './Model';
+import { BsFillMouseFill } from 'react-icons/bs';
 
 
 function ChangeCamera({ cameraPosition }) {
@@ -9,27 +10,22 @@ function ChangeCamera({ cameraPosition }) {
     let orbitPoint;
     if (cameraPosition === 1) {
         camera.position.set(-20, 5, 20);
-        camera.lookAt(0, 0, 0);
         orbitPoint = [0, 0, 0];
     }
     else if (cameraPosition === 2) {
         camera.position.set(-9, 2.5, 14);
-        camera.lookAt(-10, 2, 10);
         orbitPoint = [-8, 2, 10];
     }
     else if (cameraPosition === 3) {
         camera.position.set(0.6, 5.3, -4.6);
-        camera.lookAt(3.5, 3.5, -1);
         orbitPoint = [3.5, 3.5, -1];
     }
     else if (cameraPosition === 4) {
         camera.position.set(6, 2.0, 11);
-        camera.lookAt(10, 2, 9.6);
         orbitPoint = [10, 2, 9.6];
     }
     else if (cameraPosition === 5) {
         camera.position.set(-6, 5.5, -2);
-        camera.lookAt(-4, 4.6, -5.5);
         orbitPoint = [-4, 4.6, -5.5];
     }
 
@@ -58,7 +54,7 @@ function Main({ cameraPosition }) {
                     <meshNormalMaterial />
                 </Text3D>
                 <Billboard position={[-8, 1.5, 12]}>
-                    <Text color={'white'} maxWidth={2}>
+                    <Text color={'white'} maxWidth={1.5}>
                         Hei, jeg er Jens! Jurist og teknolog. Jobber som seniorrådgiver om dagen. Spiller gitar og koder om natten.
                     </Text>
                 </Billboard>
@@ -80,6 +76,26 @@ function Main({ cameraPosition }) {
                 <Billboard position={[-4, 4.6, -3.5]}>
                     <Text color={'white'} maxWidth={2}>
                         Spiller gitar i bandet Gete. Vi er der du strømmer musikk!
+                    </Text>
+                </Billboard>
+                <Billboard position={[-18, 3.6, 18]}>
+                    <Text color={'white'} maxWidth={2}>
+                        Følg menyen for å navigere eller:
+                    </Text>
+                </Billboard>
+                <Billboard position={[-18, 3.4, 18]}>
+                    <Text color={'white'} maxWidth={2}>
+                        Venstreklikk/en finger: se rundt
+                    </Text>
+                </Billboard>
+                <Billboard position={[-18, 3.2, 18]}>
+                    <Text color={'white'} maxWidth={2}>
+                        Høyreklikk/to fingre: panorer
+                    </Text>
+                </Billboard>
+                <Billboard position={[-18, 3, 18]}>
+                    <Text color={'white'} maxWidth={2}>
+                        Scroll/klyp: zoom
                     </Text>
                 </Billboard>
                 <Model />
