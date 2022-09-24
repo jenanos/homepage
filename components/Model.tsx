@@ -20,19 +20,19 @@ export function Model(props) {
                         castShadow
                         receiveShadow
                         geometry={nodes.TV_2_0_1.geometry}
-                        material={materials.material}
+                        material={materials["tv-onyx"]}
                     />
                     <mesh
                         castShadow
                         receiveShadow
                         geometry={nodes.TV_2_0_2.geometry}
-                        material={materials.material_2}
+                        material={materials["tv-grey"]}
                     />
                     <mesh
                         castShadow
                         receiveShadow
                         geometry={nodes.TV_2_0_3.geometry}
-                        material={materials["Material.009"]}
+                        material={materials["tv-white"]}
                     />
                 </group>
             </group>
@@ -50,10 +50,8 @@ export function Model(props) {
                 geometry={nodes.Cone.geometry}
                 material={materials.Ground}
                 position={[-0.11, -3.93, -0.07]}
-                rotation={[3.14, -0.63, -0.01]}
-                scale={[8.9, 6.34, 8.9]}
             />
-            <group position={[1.04, -0.42, -0.95]} scale={[15.01, 1.02, 15.01]}>
+            <group position={[1.04, -0.42, -0.95]}>
                 <mesh
                     castShadow
                     receiveShadow
@@ -372,7 +370,7 @@ export function Model(props) {
                     castShadow
                     receiveShadow
                     geometry={nodes.Cube019_1.geometry}
-                    material={materials["Green.010"]}
+                    material={materials["moss.green"]}
                 />
             </group>
             <group
@@ -390,7 +388,7 @@ export function Model(props) {
                     castShadow
                     receiveShadow
                     geometry={nodes.Cube019_1.geometry}
-                    material={materials["Green.010"]}
+                    material={materials["moss.green"]}
                 />
             </group>
             <group
@@ -730,7 +728,7 @@ export function Model(props) {
                 />
             </group>
             <group
-                position={[4.87, 3.72, -3.99]}
+                position={[4.87, 3.68, -3.99]}
                 rotation={[0.1, -0.7, 0.06]}
                 scale={0.6}
             >
@@ -787,10 +785,8 @@ export function Model(props) {
                 castShadow
                 receiveShadow
                 geometry={nodes.Handpainted_ladder.geometry}
-                material={materials["Material.010"]}
+                material={materials["ladder-brown"]}
                 position={[1.63, 2.76, -3.05]}
-                rotation={[1.55, 0, -0.1]}
-                scale={0}
             />
             <group
                 position={[10.81, 1.85, 11.19]}
@@ -906,6 +902,13 @@ export function Model(props) {
             <mesh
                 castShadow
                 receiveShadow
+                geometry={nodes.Cube.geometry}
+                material={materials.Ground}
+                position={[8.39, 1.12, 10.93]}
+            />
+            <mesh
+                castShadow
+                receiveShadow
                 geometry={nodes.Office_desk_ComputerDesk_0.geometry}
                 material={materials.ComputerDesk}
                 position={[10.65, 1.61, 11.74]}
@@ -967,27 +970,27 @@ export function Model(props) {
                 scale={0.13}
             />
             <group
-                position={[3.31, 3.62, -3.01]}
-                rotation={[-0.09, 1.51, 0.16]}
+                position={[2.76, 3.54, -2.24]}
+                rotation={[-1, 1.45, 1.07]}
                 scale={[0.15, 0.05, 0.1]}
             >
                 <mesh
                     castShadow
                     receiveShadow
                     geometry={nodes.Cube002.geometry}
-                    material={materials["Material.004"]}
+                    material={materials["Lovsamling-pages"]}
                 />
                 <mesh
                     castShadow
                     receiveShadow
                     geometry={nodes.Cube002_1.geometry}
-                    material={materials["Material.002"]}
+                    material={materials["lovsamling-image-text"]}
                 />
                 <mesh
                     castShadow
                     receiveShadow
                     geometry={nodes.Cube002_2.geometry}
-                    material={materials["Material.003"]}
+                    material={materials["lovsamling-red"]}
                 />
             </group>
             <group
