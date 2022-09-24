@@ -13,8 +13,8 @@ function ChangeCamera({ cameraPosition }) {
         orbitPoint = [0, 0, 0];
     }
     else if (cameraPosition === "about") {
-        camera.position.set(-9, 2.5, 15);
-        orbitPoint = [-8, 2, 10];
+        camera.position.set(-11, 2.5, 13);
+        orbitPoint = [-7.3, 2, 11.3];
     }
     else if (cameraPosition === "law") {
         camera.position.set(0.6, 5.3, -4.6);
@@ -38,7 +38,9 @@ function Main({ cameraPosition, setCameraPosition }) {
     return (
         <div className='w-full h-screen text-center'>
             <Canvas>
-                <pointLight color="orange" intensity={1} position={[-11., 2.8, 8.9]} distance={8} />
+                {/* first street light */}
+                <pointLight color="orange" intensity={1} position={[-10.75, 2.94, 9.1]} distance={8} decay={2} />
+                {/* second street light */}
                 <pointLight color="orange" intensity={1} position={[-6.2, 3.2, 1.7]} distance={8} />
                 <pointLight color="orange" intensity={1} position={[-3.3, 4.8, -5.4]} distance={2} />
                 <pointLight color="orange" intensity={1} position={[3.6, 4, -1]} distance={3} />
