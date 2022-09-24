@@ -14,11 +14,11 @@ const Home: NextPage = () => {
     <div>
       <Head>
         <title>Jens | Jurist og teknolog</title>
-        <meta name="description" content="Jurist og teknolog. Jobber som seniorrådgiver i Digdir på dagen. Programmerer og spiller gitar om natten." />
+        <meta name="description" content="Jurist og teknolog. Jobber som seniorrådgiver i Digdir på dagen. Spiller gitar og koder om natten." />
         <link rel="icon" href="/jenslogo.ico" />
       </Head>
       <Navbar cameraPosition={cameraPosition} setCameraPosition={setCameraPosition} />
-      <Main cameraPosition={cameraPosition} />
+      <Main cameraPosition={cameraPosition} setCameraPosition={setCameraPosition} />
     </div>
   )
 }

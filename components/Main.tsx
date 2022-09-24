@@ -2,6 +2,7 @@ import React from 'react'
 import { Canvas, useThree } from '@react-three/fiber'
 import { Environment, OrbitControls, Loader, Text, Billboard } from '@react-three/drei';
 import { Model } from './Model';
+import TextComponents from './TextComponents';
 
 
 function ChangeCamera({ cameraPosition }) {
@@ -33,7 +34,7 @@ function ChangeCamera({ cameraPosition }) {
 
 
 
-function Main({ cameraPosition }) {
+function Main({ cameraPosition, setCameraPosition }) {
     return (
         <div className='w-full h-screen text-center'>
             <Canvas>
@@ -42,51 +43,7 @@ function Main({ cameraPosition }) {
                 <pointLight color="orange" intensity={1} position={[-3.3, 4.8, -5.4]} distance={2} />
                 <pointLight color="orange" intensity={1} position={[3.6, 4, -1]} distance={3} />
                 <pointLight color="white" intensity={1} position={[12.3, 1.9, 8.9]} distance={8} />
-                <Billboard position={[-8, 1.5, 12]}>
-                    <Text color={'white'} maxWidth={2}>
-                        Jurist og teknolog. Jobber som seniorrådgiver om dagen. Spiller gitar og koder om natten.
-                    </Text>
-                </Billboard>
-                <Billboard position={[3.5, 5, -1]}>
-                    <Text color={'white'} maxWidth={2}>
-                        Utdannet jurist med master i rettsvitenskap fra UiO. Jobber med EU-juss, særlig personvern. Ekspert på Schrems II og bruk av skytjenester.
-                    </Text>
-                </Billboard>
-                <Billboard position={[10, 2.5, 10]}>
-                    <Text color={'yellow'} maxWidth={2}>
-                        Utdannet teknolog med en bachelor i programmering og systemarkitektur fra UiO. Spesialisert på nettverk- og kommunikasjonssikkerhet.
-                    </Text>
-                </Billboard>
-                <Billboard position={[10, 1.5, 11]}>
-                    <Text color={'yellow'} maxWidth={2}>
-                        Denne siden er laget med Next.js, React, Tailwind, og Three.js. Modellen er laget i Blender.
-                    </Text>
-                </Billboard>
-                <Billboard position={[-5, 4.3, -4.5]}>
-                    <Text color={'white'} maxWidth={2} anchorX="left">
-                        Spiller gitar i bandet Gete. Vi er der du strømmer musikk!
-                    </Text>
-                </Billboard>
-                <Billboard position={[-18, 3.2, 17]}>
-                    <Text color={'white'} maxWidth={2} anchorX="left">
-                        Følg menyen for å navigere eller:
-                    </Text>
-                </Billboard>
-                <Billboard position={[-18, 2.8, 17]}>
-                    <Text color={'white'} maxWidth={2} anchorX="left">
-                        Venstreklikk/en finger: se rundt
-                    </Text>
-                </Billboard>
-                <Billboard position={[-18, 2.6, 17]}>
-                    <Text color={'white'} maxWidth={2} anchorX="left">
-                        Høyreklikk/to fingre: panorer
-                    </Text>
-                </Billboard>
-                <Billboard position={[-18, 2.4, 17]}>
-                    <Text color={'white'} maxWidth={2} anchorX="left">
-                        Scroll/klyp: zoom
-                    </Text>
-                </Billboard>
+                <TextComponents cameraPosition={cameraPosition} setCameraPosition={setCameraPosition} />
                 <Model />
                 <ChangeCamera cameraPosition={cameraPosition} />
                 <Environment
