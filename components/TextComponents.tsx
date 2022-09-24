@@ -29,11 +29,6 @@ function TextComponents({ cameraPosition, setCameraPosition }) {
                     Spiller gitar i bandet Gete. Vi er der du strømmer musikk!
                 </Text>
             </Billboard>
-            <Billboard position={[-18, 3.2, 17]}>
-                <Text color={'white'} maxWidth={2} anchorX="left">
-                    Følg menyen for å navigere eller:
-                </Text>
-            </Billboard>
             <Billboard position={[-18, 2.8, 17]}>
                 <Text color={'white'} maxWidth={2} anchorX="left">
                     Venstreklikk/en finger: se rundt

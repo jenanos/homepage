@@ -51,7 +51,7 @@ function Main({ cameraPosition, setCameraPosition }) {
                     background
                 />
             </Canvas>
-            <Loader />
+            <Loader dataInterpolation={(p) => `Ikke hengt meg opp. Hopper straks fra 0 til 100 ${p.toFixed(2)}%`} />
         </div>
     )
 }
