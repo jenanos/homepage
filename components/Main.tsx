@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { Canvas, useThree } from '@react-three/fiber'
 import { Environment, OrbitControls, Loader, Text, Billboard } from '@react-three/drei';
 import { Model } from './Model';
@@ -7,23 +7,23 @@ import { Model } from './Model';
 function ChangeCamera({ cameraPosition }) {
     const camera = useThree((state) => state.camera)
     let orbitPoint;
-    if (cameraPosition === 1) {
+    if (cameraPosition === "start") {
         camera.position.set(-20, 5, 20);
         orbitPoint = [0, 0, 0];
     }
-    else if (cameraPosition === 2) {
+    else if (cameraPosition === "about") {
         camera.position.set(-9, 2.5, 15);
         orbitPoint = [-8, 2, 10];
     }
-    else if (cameraPosition === 3) {
+    else if (cameraPosition === "law") {
         camera.position.set(0.6, 5.3, -4.6);
         orbitPoint = [3.5, 3.5, -1];
     }
-    else if (cameraPosition === 4) {
+    else if (cameraPosition === "tech") {
         camera.position.set(6, 2.0, 11);
         orbitPoint = [10, 2, 9.6];
     }
-    else if (cameraPosition === 5) {
+    else if (cameraPosition === "music") {
         camera.position.set(-6, 5.5, -2);
         orbitPoint = [-4, 4.6, -5.5];
     }

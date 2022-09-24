@@ -4,7 +4,6 @@ import NavImg from "../public/jenslogo.ico";
 import Link from "next/link";
 import { AiOutlineClose, AiOutlineMail, AiOutlineMenu } from 'react-icons/ai';
 import { FaGithub, FaLinkedinIn } from 'react-icons/fa';
-import { BsFillPersonLinesFill } from 'react-icons/bs';
 
 function Navbar({ cameraPosition, setCameraPosition }) {
   const [nav, setNav] = useState(false);
@@ -26,8 +25,8 @@ function Navbar({ cameraPosition, setCameraPosition }) {
     window.addEventListener('scroll', handleShadow);
   }, []);
 
-  function setCameraAndCloseNav(cameraNumber: number) {
-    setCameraPosition(cameraNumber);
+  function setCameraAndCloseNav(cameraName: string) {
+    setCameraPosition(cameraName);
     setNav(false);
   }
 
@@ -48,19 +47,19 @@ function Navbar({ cameraPosition, setCameraPosition }) {
           height='60'
           width='150'
           className="cursor-pointer"
-          onClick={() => setCameraPosition(1)} />
+          onClick={() => setCameraPosition("start")} />
         <div>
           <ul className="hidden md:flex">
-            <li onClick={() => setCameraPosition(2)} className="ml-10 text-sm uppercase hover:border-b">
+            <li onClick={() => setCameraPosition("about")} className="ml-10 text-sm uppercase hover:border-b">
               Om meg
             </li>
-            <li onClick={() => setCameraPosition(3)} className="ml-10 text-sm uppercase hover:border-b">
+            <li onClick={() => setCameraPosition("law")} className="ml-10 text-sm uppercase hover:border-b">
               Juss
             </li>
-            <li onClick={() => setCameraPosition(4)} className="ml-10 text-sm uppercase hover:border-b">
+            <li onClick={() => setCameraPosition("tech")} className="ml-10 text-sm uppercase hover:border-b">
               Teknologi
             </li>
-            <li onClick={() => setCameraPosition(5)} className="ml-10 text-sm uppercase hover:border-b">
+            <li onClick={() => setCameraPosition("music")} className="ml-10 text-sm uppercase hover:border-b">
               Musikk
             </li>
             <li className="ml-10 text-sm uppercase hover:border-b">
@@ -121,16 +120,16 @@ function Navbar({ cameraPosition, setCameraPosition }) {
           </div>
           <div className="py-4 flex flex-col">
             <ul className="uppercase">
-              <li onClick={() => setCameraAndCloseNav(2)} className='py-4 text-sm'>
+              <li onClick={() => setCameraAndCloseNav("about")} className='py-4 text-sm'>
                 Om meg
               </li>
-              <li onClick={() => setCameraAndCloseNav(3)} className='py-4 text-sm'>
+              <li onClick={() => setCameraAndCloseNav("about")} className='py-4 text-sm'>
                 Juss
               </li>
-              <li onClick={() => setCameraAndCloseNav(4)} className='py-4 text-sm'>
+              <li onClick={() => setCameraAndCloseNav("tech")} className='py-4 text-sm'>
                 Teknologi
               </li>
-              <li onClick={() => setCameraAndCloseNav(5)} className='py-4 text-sm'>
+              <li onClick={() => setCameraAndCloseNav("music")} className='py-4 text-sm'>
                 Musikk
               </li>
             </ul>
