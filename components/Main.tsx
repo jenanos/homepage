@@ -1,6 +1,6 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Canvas, useThree } from '@react-three/fiber'
-import { Environment, OrbitControls, Loader, Text, Billboard } from '@react-three/drei';
+import { Environment, OrbitControls, Loader, PositionalAudio, } from '@react-three/drei';
 import { Model } from './Model';
 import TextComponents from './TextComponents';
 
@@ -35,6 +35,8 @@ function ChangeCamera({ cameraPosition }) {
 
 
 function Main({ cameraPosition, setCameraPosition }) {
+    const [musicReady, setMusicReady] = useState(false);
+
     return (
         <div className='w-full h-screen text-center'>
             <Canvas>
@@ -45,13 +47,16 @@ function Main({ cameraPosition, setCameraPosition }) {
                 <pointLight color="orange" intensity={1} position={[-3.3, 4.8, -5.4]} distance={2} />
                 <pointLight color="orange" intensity={1} position={[3.6, 4, -1]} distance={3} />
                 <pointLight color="white" intensity={1} position={[12.3, 1.9, 8.9]} distance={8} />
-                <TextComponents cameraPosition={cameraPosition} setCameraPosition={setCameraPosition} />
-                <Model />
+                <TextComponents musicReady={musicReady} setMusicReady={setMusicReady} cameraPosition={cameraPosition} setCameraPosition={setCameraPosition} />
+                <Model musicReady={musicReady} setMusicReady={setMusicReady} />
                 <ChangeCamera cameraPosition={cameraPosition} />
                 <Environment
                     files="dikhololo_night_1k.hdr"
                     background
                 />
+                <group position={[-4, 4.6, -5.5]}>
+                    {musicReady && <PositionalAudio autoplay loop url="/stjernan.mp3" distance={3} />}
+                </group>
             </Canvas>
             <Loader dataInterpolation={(p) => `Ikke hengt meg opp. Hopper straks fra 0 til 100 ${p.toFixed(2)}%`} />
         </div>

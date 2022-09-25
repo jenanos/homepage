@@ -1,7 +1,7 @@
 import React from 'react'
 import { Text, Billboard } from '@react-three/drei';
 
-function TextComponents({ cameraPosition, setCameraPosition }) {
+function TextComponents({ musicReady, setMusicReady, cameraPosition, setCameraPosition }) {
     return (
         <group>
             <Billboard position={[-8, 1.5, 12]} onClick={() => setCameraPosition("about")}>
@@ -24,9 +24,9 @@ function TextComponents({ cameraPosition, setCameraPosition }) {
                     Siden er laget med Next.js, React, Tailwind, Three.js og Blender.
                 </Text>
             </Billboard>
-            <Billboard position={[-5, 4.3, -4.5]} onClick={() => setCameraPosition("music")}>
+            <Billboard position={[-5, 4, -4.5]} onClick={() => setCameraPosition("music")}>
                 <Text color={'white'} maxWidth={1.2} anchorX="left">
-                    Spiller gitar i bandet Gete. Vi er der du strømmer musikk!
+                    Spiller gitar i bandet Gete. Vi er der du strømmer musikk! Du kan også klikke på radioen i tårnet.
                 </Text>
             </Billboard>
             <Billboard position={[-18, 2.8, 17]}>
