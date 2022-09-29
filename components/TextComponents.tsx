@@ -45,14 +45,14 @@ function TextComponents({ musicReady, setMusicReady, cameraPosition, setCameraPo
                     <meshStandardMaterial color={textColor} />
                 </Text3D>
             </Billboard>
-            <Billboard position={[10, 2.5, 10]} onClick={() => setCameraPosition("tech")}>
+            <Billboard position={[10, 2.65, 10]} onClick={() => setCameraPosition("tech")}>
                 <Text color={'yellow'} maxWidth={2}>
-                    {'Teknolog med bachelor i programmering og systemarkitektur fra UiO. Spesialisert på nettverk- og kommunikasjonssikkerhet.'}
+                    {'Teknolog med bachelor i programmering og systemarkitektur fra UiO.\n\nSpesialisert på nettverk- og kommunikasjonssikkerhet.'}
                 </Text>
             </Billboard>
             <Billboard position={[10, 1.75, 11]} onClick={() => setCameraPosition("tech")}>
                 <Text color={'yellow'} maxWidth={1}>
-                    {'Siden er laget med:\n- Next.js\n- React\n- Tailwind\n- Three.js\n- Blender'}
+                    {'Denne siden er laget med:\n- Next.js\n- React\n- Tailwind\n- Three.js\n- Blender'}
                 </Text>
             </Billboard>
 

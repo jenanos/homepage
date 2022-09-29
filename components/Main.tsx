@@ -21,7 +21,7 @@ function ChangeCamera({ cameraPosition }) {
         orbitPoint = [3.5, 3.5, -1];
     }
     else if (cameraPosition === "tech") {
-        camera.position.set(6, 2.0, 11);
+        camera.position.set(5, 2.5, 12);
         orbitPoint = [10, 2, 9.6];
     }
     else if (cameraPosition === "music") {
@@ -58,7 +58,7 @@ function Main({ cameraPosition, setCameraPosition }) {
                     {musicReady && <PositionalAudio autoplay loop url="/stjernan.mp3" distance={3} />}
                 </group>
             </Canvas>
-            <Loader dataInterpolation={(p) => `Ikke hengt meg opp. Hopper straks fra 0 til 100 ${p.toFixed(2)}%`} />
+            <Loader containerStyles={{ background: '#6E350F', }} dataInterpolation={(p) => `${p.toFixed(2)}%\n Bruker litt tid, men er der straks.\nHopper plutselig til 100 `} />
         </div>
     )
 }
