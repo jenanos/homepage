@@ -70,8 +70,8 @@ function TextComponents({ musicReady, setMusicReady, cameraPosition, setCameraPo
                 </Text>
             </Billboard>
             <Billboard position={[-18, 2.8, 17]}>
-                <Text color={'white'} maxWidth={2} anchorX="left">
-                    {'Venstreklikk/en finger: se rundt\nHøyreklikk/to fingre: panorer\nScroll/klyp: zoom'}
+                <Text color={'white'} maxWidth={3} anchorX="left">
+                    {'Se rundt:           venstreklikk/en finger\nPanorer:            høyreklikk/to fingre\nZoom:               scroll/klyp\nNytt kamera:    bruk meny eller trykk på tekstene'}
                 </Text>
             </Billboard>
         </group>

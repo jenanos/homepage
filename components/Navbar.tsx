@@ -94,16 +94,12 @@ function Navbar({ cameraPosition, setCameraPosition }) {
           <div>
 
             <div className="flex w-full items-center justify-between">
-              <Link href='/'>
-                <a>
-                  <Image
-                    src={NavImg}
-                    width='87'
-                    height='35'
-                    alt='/'
-                  />
-                </a>
-              </Link>
+              <Image onClick={() => setCameraAndCloseNav("start")}
+                src={NavImg}
+                width='87'
+                height='35'
+                alt='/'
+              />
               <div
                 onClick={handleNav}
                 className='rounded-full shadow-lg shadow-gray-400 p-3 cursor-pointer'
@@ -112,7 +108,7 @@ function Navbar({ cameraPosition, setCameraPosition }) {
 
               </div>
             </div>
-            <div className="border-b border-gray-300 my-4">
+            <div className="border-b border-gray-300 my-4" onClick={() => setCameraAndCloseNav("start")}>
               <p className="w-[85%] md:w-[90%] py-4">
                 Jurist og teknolog
               </p>
@@ -123,7 +119,7 @@ function Navbar({ cameraPosition, setCameraPosition }) {
               <li onClick={() => setCameraAndCloseNav("about")} className='py-4 text-sm'>
                 Om meg
               </li>
-              <li onClick={() => setCameraAndCloseNav("about")} className='py-4 text-sm'>
+              <li onClick={() => setCameraAndCloseNav("law")} className='py-4 text-sm'>
                 Juss
               </li>
               <li onClick={() => setCameraAndCloseNav("tech")} className='py-4 text-sm'>
