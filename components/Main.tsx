@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Canvas, useThree } from '@react-three/fiber'
+import { Canvas, useThree, Vector3 } from '@react-three/fiber'
 import { Environment, OrbitControls, Loader, PositionalAudio, } from '@react-three/drei';
 import { Model } from './Model';
 import TextComponents from './TextComponents';
@@ -7,27 +7,31 @@ import TextComponents from './TextComponents';
 
 function ChangeCamera({ cameraPosition }) {
     const camera = useThree((state) => state.camera)
-    let orbitPoint;
+    let orbitPoint: Vector3;
+    let targetCoordinates: [number, number, number];
+
     if (cameraPosition === "start") {
-        camera.position.set(-20, 5, 20);
+        targetCoordinates = [-20, 5, 20];
         orbitPoint = [0, 0, 0];
     }
     else if (cameraPosition === "about") {
-        camera.position.set(-11, 2.5, 13);
+        targetCoordinates = [-11, 2.5, 13];
         orbitPoint = [-7.3, 2, 11.3];
     }
     else if (cameraPosition === "law") {
-        camera.position.set(0.6, 5.3, -4.6);
+        targetCoordinates = [0.6, 5.3, -4.6]
         orbitPoint = [3.5, 3.5, -1];
     }
     else if (cameraPosition === "tech") {
-        camera.position.set(5, 2.5, 12);
+        targetCoordinates = [5, 2.5, 12]
         orbitPoint = [10, 2, 9.6];
     }
     else if (cameraPosition === "music") {
-        camera.position.set(-6, 5.5, -2);
+        targetCoordinates = [-6, 5.5, -2]
         orbitPoint = [-4, 4.6, -5.5];
     }
+
+    camera.position.set(...targetCoordinates);
 
     return <OrbitControls target={orbitPoint} />
 }
