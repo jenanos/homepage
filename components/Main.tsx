@@ -1,48 +1,57 @@
 import React, { useState } from 'react'
-import { Canvas, useThree, Vector3 } from '@react-three/fiber'
-import { Environment, OrbitControls, Loader, PositionalAudio, } from '@react-three/drei';
+import { Canvas, useFrame, useThree, Vector3 } from '@react-three/fiber'
+import { Environment, OrbitControls, Loader, PositionalAudio, ScrollControls, PerspectiveCamera, useScroll } from '@react-three/drei';
 import { Model } from './Model';
 import TextComponents from './TextComponents';
+import { Vector } from 'three';
 
 
-function ChangeCamera({ cameraPosition }) {
+function ChangeCamera({ cameraPosition, targetCoordinates, setTargetCoordinates, orbitPoint, setOrbitPoint }) {
     const camera = useThree((state) => state.camera)
-    let orbitPoint: Vector3;
-    let targetCoordinates: [number, number, number];
+    const scroll = useScroll();
+
 
     if (cameraPosition === "start") {
-        targetCoordinates = [-20, 5, 20];
-        orbitPoint = [0, 0, 0];
+        setTargetCoordinates([-20, 5, 20]);
+        setOrbitPoint([0, 0, 0]);
     }
     else if (cameraPosition === "about") {
-        targetCoordinates = [-11, 2.5, 13];
-        orbitPoint = [-7.3, 2, 11.3];
+        setTargetCoordinates([-11, 2.5, 13]);
+        setOrbitPoint([-7.3, 2, 11.3]);
     }
     else if (cameraPosition === "law") {
-        targetCoordinates = [0.6, 5.3, -4.6]
-        orbitPoint = [3.5, 3.5, -1];
+        setTargetCoordinates([0.6, 5.3, -4.6]);
+        setOrbitPoint([3.5, 3.5, -1]);
     }
     else if (cameraPosition === "tech") {
-        targetCoordinates = [5, 2.5, 12]
-        orbitPoint = [10, 2, 9.6];
+        setTargetCoordinates([5, 2.5, 12]);
+        setOrbitPoint([10, 2, 9.6]);
     }
     else if (cameraPosition === "music") {
-        targetCoordinates = [-6, 5.5, -2]
-        orbitPoint = [-4, 4.6, -5.5];
+        setTargetCoordinates([-6, 5.5, -2]);
+        setOrbitPoint([-4, 4.6, -5.5]);
     }
 
-    camera.position.set(...targetCoordinates);
+    useFrame(() => {
+        console.log(scroll.delta);
+    })
 
-    return <OrbitControls target={orbitPoint} />
+    camera.position.set(targetCoordinates[0], targetCoordinates[1], targetCoordinates[2]);
+    camera.lookAt(orbitPoint[0], orbitPoint[1], orbitPoint[2]);
+
+    // return <PerspectiveCamera makeDefault position={cameraPosition} />
+    return <group />
 }
 
 
 
 function Main({ cameraPosition, setCameraPosition }) {
     const [musicReady, setMusicReady] = useState(false);
+    const [targetCoordinates, setTargetCoordinates] = useState([-40, 5, 20]);
+    const [orbitPoint, setOrbitPoint] = useState([0, 0, 0]);
 
     return (
-        <div className='w-full h-screen text-center'>
+        <div className='w-full h-screen'>
             <Canvas>
                 {/* first street light */}
                 <pointLight color="orange" intensity={1} position={[-10.75, 2.94, 9.1]} distance={8} decay={2} />
@@ -53,7 +62,10 @@ function Main({ cameraPosition, setCameraPosition }) {
                 <pointLight color="white" intensity={1} position={[12.3, 1.9, 8.9]} distance={8} />
                 <TextComponents musicReady={musicReady} setMusicReady={setMusicReady} cameraPosition={cameraPosition} setCameraPosition={setCameraPosition} />
                 <Model musicReady={musicReady} setMusicReady={setMusicReady} />
-                <ChangeCamera cameraPosition={cameraPosition} />
+                {/* @ts-ignore*/}
+                <ScrollControls pages={3}>
+                    <ChangeCamera cameraPosition={cameraPosition} targetCoordinates={targetCoordinates} setTargetCoordinates={setTargetCoordinates} orbitPoint={orbitPoint} setOrbitPoint={setOrbitPoint} />
+                </ScrollControls>
                 <Environment
                     files="dikhololo_night_1k.hdr"
                     background
