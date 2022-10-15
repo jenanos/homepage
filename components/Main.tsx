@@ -1,6 +1,6 @@
 import React, { Suspense, useState } from 'react'
 import { Canvas, useFrame } from '@react-three/fiber'
-import { Environment, Loader, PositionalAudio, ScrollControls, useScroll, PerspectiveCamera } from '@react-three/drei';
+import { Environment, Loader, PositionalAudio, ScrollControls, useScroll } from '@react-three/drei';
 import { Model } from './Model';
 import TextComponents from './TextComponents';
 import * as THREE from 'three'
@@ -8,59 +8,32 @@ import { Vector3 } from 'three';
 
 
 
-function ChangeCamera({ cameraPosition, setCameraPosition, scrollMode }) {
-    // const perspectiveCamera = <PerspectiveCamera makeDefault />;
-    const scroll = useScroll();
+function ChangeCamera({ cameraPosition }) {
     let targetCoordinates: [number, number, number];
     let orbitPoint: [number, number, number];
 
-    if (!scrollMode) {
-        if (cameraPosition === "start") {
-            targetCoordinates = [-20, 5, 20];
-            orbitPoint = [0, 0, 0];
-        }
-        else if (cameraPosition === "about") {
-            targetCoordinates = [-11, 2.5, 13];
-            orbitPoint = [-7.3, 2, 11.3];
-        }
-        else if (cameraPosition === "law") {
-            targetCoordinates = [0.6, 5.3, -4.6];
-            orbitPoint = [3.5, 3.5, -1];
-        }
-        else if (cameraPosition === "tech") {
-            targetCoordinates = [5, 2.5, 12];
-            orbitPoint = [10, 2, 9.6];
-        }
-        else if (cameraPosition === "music") {
-            targetCoordinates = [-6, 5.5, -2];
-            orbitPoint = [-4, 4.6, -5.5];
-        }
+
+    if (cameraPosition === "start") {
+        targetCoordinates = [-20, 5, 20];
+        orbitPoint = [0, 0, 0];
+    }
+    else if (cameraPosition === "about") {
+        targetCoordinates = [-11, 2.5, 13];
+        orbitPoint = [-7.3, 2, 11.3];
+    }
+    else if (cameraPosition === "law") {
+        targetCoordinates = [0.6, 5.3, -4.6];
+        orbitPoint = [3.5, 3.5, -1];
+    }
+    else if (cameraPosition === "tech") {
+        targetCoordinates = [5, 2.5, 12];
+        orbitPoint = [10, 2, 9.6];
+    }
+    else if (cameraPosition === "music") {
+        targetCoordinates = [-6, 5.5, -2];
+        orbitPoint = [-4, 4.6, -5.5];
     }
 
-    else if (scrollMode) {
-
-        if (scroll.offset > 0 && scroll.offset < 0.2) {
-            targetCoordinates = [-20, 5, 20];
-            orbitPoint = [0, 0, 0];
-        }
-        else if (scroll.offset > 0.2 && scroll.offset < 0.4) {
-            targetCoordinates = [-11, 2.5, 13];
-            orbitPoint = [-7.3, 2, 11.3];
-        }
-        else if (scroll.offset > 0.4 && scroll.offset < 0.6) {
-            targetCoordinates = [0.6, 5.3, -4.6];
-            orbitPoint = [3.5, 3.5, -1];
-        }
-        else if (scroll.offset > 0.6 && scroll.offset < 0.8) {
-            targetCoordinates = [5, 2.5, 12];
-            orbitPoint = [10, 2, 9.6];
-        }
-        else if (scroll.offset > 0.8 && scroll.offset < 1) {
-            targetCoordinates = [-6, 5.5, -2];
-            orbitPoint = [-4, 4.6, -5.5];
-        }
-
-    }
 
     useFrame(state => {
         let camera = state.camera;
@@ -73,12 +46,32 @@ function ChangeCamera({ cameraPosition, setCameraPosition, scrollMode }) {
             camera.lookAt(...orbitPoint);
         }
     })
-
-
-    // return perspectiveCamera;
-    return <group />;
+    return null;
 }
 
+function SetScrollPosition({ setCameraPosition }) {
+    const scroll = useScroll();
+    useFrame(() => {
+
+        if (scroll.offset > 0 && scroll.offset < 0.2) {
+            setCameraPosition("start")
+        }
+        else if (scroll.offset > 0.2 && scroll.offset < 0.4) {
+            setCameraPosition("about")
+        }
+        else if (scroll.offset > 0.4 && scroll.offset < 0.6) {
+            setCameraPosition("law")
+        }
+        else if (scroll.offset > 0.6 && scroll.offset < 0.8) {
+            setCameraPosition("tech")
+        }
+        else if (scroll.offset > 0.8 && scroll.offset < 1) {
+            setCameraPosition("music")
+        }
+
+    })
+    return null;
+}
 
 
 function Main({ cameraPosition, setCameraPosition, scrollMode, setScrollMode }) {
@@ -97,8 +90,9 @@ function Main({ cameraPosition, setCameraPosition, scrollMode, setScrollMode }) 
                 <TextComponents musicReady={musicReady} setMusicReady={setMusicReady} cameraPosition={cameraPosition} setCameraPosition={setCameraPosition} />
                 <Model musicReady={musicReady} setMusicReady={setMusicReady} />
                 {/* @ts-ignore*/}
-                <ScrollControls pages={5}>
-                    <ChangeCamera cameraPosition={cameraPosition} setCameraPosition={setCameraPosition} scrollMode={scrollMode} />
+                <ScrollControls distance={8} damping={10}>
+                    {scrollMode && <SetScrollPosition setCameraPosition={setCameraPosition} />}
+                    <ChangeCamera cameraPosition={cameraPosition} />
                 </ScrollControls>
                 <Environment
                     files="dikhololo_night_1k.hdr"
