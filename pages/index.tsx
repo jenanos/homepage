@@ -9,6 +9,7 @@ import { useState } from 'react'
 const Home: NextPage = () => {
 
   const [cameraPosition, setCameraPosition] = useState("start");
+  const [scrollMode, setScrollMode] = useState(false);
 
   return (
     <div>
@@ -17,8 +18,8 @@ const Home: NextPage = () => {
         <meta name="description" content="Jurist og teknolog. Jobber som seniorrådgiver i Digdir på dagen. Spiller gitar og koder om natten." />
         <link rel="icon" href="/jenslogo.ico" />
       </Head>
-      <Navbar cameraPosition={cameraPosition} setCameraPosition={setCameraPosition} />
-      <Main cameraPosition={cameraPosition} setCameraPosition={setCameraPosition} />
+      <Navbar cameraPosition={cameraPosition} setCameraPosition={setCameraPosition} scrollMode={scrollMode} setScrollMode={setScrollMode} />
+      <Main cameraPosition={cameraPosition} setCameraPosition={setCameraPosition} scrollMode={scrollMode} setScrollMode={setScrollMode} />
     </div>
   )
 }
