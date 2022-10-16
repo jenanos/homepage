@@ -47,7 +47,7 @@ function ChangeCamera({ cameraPosition, setCameraPosition, minimapClicked, setMi
         let camera = state.camera;
         if (targetCoordinates) {
             let targetVector: Vector3 = new THREE.Vector3(targetCoordinates[0], targetCoordinates[1], targetCoordinates[2]);
-            camera.position.lerp(targetVector, 0.01);
+            camera.position.lerp(targetVector, 0.03);
             camera.updateProjectionMatrix();
         }
         if (orbitPoint) {
