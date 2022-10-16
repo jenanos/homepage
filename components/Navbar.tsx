@@ -5,7 +5,7 @@ import Link from "next/link";
 import { AiOutlineClose, AiOutlineMail, AiOutlineMenu } from 'react-icons/ai';
 import { FaGithub, FaLinkedinIn } from 'react-icons/fa';
 
-function Navbar({ setCameraPosition, setScrollMode }) {
+function Navbar({ setCameraPosition, showMap, toggleMap }) {
   const [nav, setNav] = useState(false);
   const [navBg, setNavBg] = useState('#ecf0f3');
   const [shadow, setShadow] = useState(false);
@@ -27,13 +27,13 @@ function Navbar({ setCameraPosition, setScrollMode }) {
 
   function setCamera(cameraName: string) {
     setCameraPosition(cameraName);
-    setScrollMode(false);
+    toggleMap(false);
   }
 
   function setCameraAndCloseNav(cameraName: string) {
     setCameraPosition(cameraName);
     setNav(false);
-    setScrollMode(false);
+    toggleMap(false);
   }
 
   return (

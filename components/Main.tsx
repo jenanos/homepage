@@ -115,11 +115,10 @@ function OpenMinimap({ cameraPosition, showMap, toggleMap, setMapPosition, setMa
 }
 
 
-function Main({ cameraPosition, setCameraPosition, scrollMode, setScrollMode }) {
+function Main({ cameraPosition, setCameraPosition, showMap, toggleMap }) {
     const [musicReady, setMusicReady] = useState(false);
     const [mapPosition, setMapPostition] = useState([-18, 4, 18]);
     const [mapLightPosition, setMapLightPostition] = useState([-18, 4, 18]);
-    const [showMap, toggleMap] = useState(true);
     const [minimapClicked, setMinimapClicked] = useState(["start", false]);
 
     return (
