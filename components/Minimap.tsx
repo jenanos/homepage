@@ -18,7 +18,7 @@ export function Minimap({ minimapClicked, setMinimapClicked }) {
                 position={[0.03, -0.02, 0.03]}
                 rotation={[1.98, -0.27, 0.36]}
                 scale={0.03}
-                onClick={() => setMinimapClicked(["about", "yes"])}
+                onClick={() => setMinimapClicked(["about", true])}
             />
             <mesh
                 castShadow
@@ -28,7 +28,7 @@ export function Minimap({ minimapClicked, setMinimapClicked }) {
                 position={[-0.11, 0.1, -0.03]}
                 rotation={[1.78, 0, 0.21]}
                 scale={0.05}
-                onClick={() => setMinimapClicked(["law", "yes"])}
+                onClick={() => setMinimapClicked(["law", true])}
             />
             <mesh
                 castShadow
@@ -38,7 +38,7 @@ export function Minimap({ minimapClicked, setMinimapClicked }) {
                 position={[-0.16, 0.01, 0]}
                 rotation={[1.89, 0.35, -0.22]}
                 scale={0.04}
-                onClick={() => setMinimapClicked(["about", "yes"])}
+                onClick={() => setMinimapClicked(["music", true])}
             />
             <mesh
                 castShadow
@@ -48,7 +48,7 @@ export function Minimap({ minimapClicked, setMinimapClicked }) {
                 position={[0.02, 0.1, -0.02]}
                 rotation={[1.83, 0.02, 0.19]}
                 scale={0.04}
-                onClick={() => setMinimapClicked(["about", "yes"])}
+                onClick={() => setMinimapClicked(["tech", true])}
             />
             <mesh
                 castShadow
@@ -58,7 +58,7 @@ export function Minimap({ minimapClicked, setMinimapClicked }) {
                 position={[-0.16, -0.05, 0.02]}
                 rotation={[1.08, 0.11, 0.16]}
                 scale={0.02}
-                onClick={() => setMinimapClicked(["about", "yes"])}
+                onClick={() => setMinimapClicked(["start", true])}
             />
             <mesh
                 castShadow

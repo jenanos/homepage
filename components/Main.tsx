@@ -14,7 +14,7 @@ function ChangeCamera({ cameraPosition, setCameraPosition, minimapClicked, setMi
     let targetCoordinates: [number, number, number];
     let orbitPoint: [number, number, number];
 
-    if (minimapClicked[1] === "yes") {
+    if (minimapClicked[1]) {
         setCameraPosition(minimapClicked[0]);
         toggleMap(false);
     }
@@ -40,7 +40,7 @@ function ChangeCamera({ cameraPosition, setCameraPosition, minimapClicked, setMi
         orbitPoint = [-4, 4.6, -5.5];
     }
 
-    setMinimapClicked(["start", "no"]);
+    setMinimapClicked(["start", false]);
 
 
     useFrame(state => {
@@ -114,7 +114,7 @@ function Main({ cameraPosition, setCameraPosition, scrollMode, setScrollMode }) 
     const [musicReady, setMusicReady] = useState(false);
     const [mapPosition, setMapPostition] = useState([-18, 4, 18]);
     const [showMap, toggleMap] = useState(true);
-    const [minimapClicked, setMinimapClicked] = useState(["start", "no"]);
+    const [minimapClicked, setMinimapClicked] = useState(["start", false]);
 
     return (
         <div className='w-full h-screen'>
