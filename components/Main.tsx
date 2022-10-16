@@ -59,9 +59,10 @@ function OpenMinimap({ cameraPosition, showMap, toggleMap, setMapPostition }) {
     let textSize: number = 0.1;
 
     if (cameraPosition === "start") {
-        targetCoordinatesText = [-18.5, 3, 17.58];
-        targetCoordinatesThumb = [-18, 1.5, 17];
+        targetCoordinatesText = [-19.32, 4.1, 19.2];
+        targetCoordinatesThumb = [-19, 4, 19.4];
         setMapPostition([-18, 4, 18]);
+        textSize = 0.05;
     }
     else if (cameraPosition === "about") {
         targetCoordinatesText = [-9.5, 1.27, 12.1];
