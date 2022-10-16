@@ -1,10 +1,11 @@
 import React, { Suspense, useState } from 'react'
 import { Canvas, useFrame } from '@react-three/fiber'
-import { Environment, Loader, PositionalAudio, ScrollControls, useScroll } from '@react-three/drei';
+import { Environment, Loader, PositionalAudio, Billboard } from '@react-three/drei';
 import { Model } from './Model';
 import TextComponents from './TextComponents';
 import * as THREE from 'three'
 import { Vector3 } from 'three';
+import { Minimap } from './Minimap';
 
 
 
@@ -45,31 +46,9 @@ function ChangeCamera({ cameraPosition }) {
         if (orbitPoint) {
             camera.lookAt(...orbitPoint);
         }
-    })
-    return null;
-}
-
-function SetScrollPosition({ setCameraPosition }) {
-    const scroll = useScroll();
-    useFrame(() => {
-
-        if (scroll.offset > 0 && scroll.offset < 0.2) {
-            setCameraPosition("start")
-        }
-        else if (scroll.offset > 0.2 && scroll.offset < 0.4) {
-            setCameraPosition("about")
-        }
-        else if (scroll.offset > 0.4 && scroll.offset < 0.6) {
-            setCameraPosition("law")
-        }
-        else if (scroll.offset > 0.6 && scroll.offset < 0.8) {
-            setCameraPosition("tech")
-        }
-        else if (scroll.offset > 0.8 && scroll.offset < 1) {
-            setCameraPosition("music")
-        }
 
     })
+
     return null;
 }
 
@@ -89,11 +68,12 @@ function Main({ cameraPosition, setCameraPosition, scrollMode, setScrollMode }) 
                 <pointLight color="white" intensity={1} position={[12.3, 1.9, 8.9]} distance={8} />
                 <TextComponents musicReady={musicReady} setMusicReady={setMusicReady} cameraPosition={cameraPosition} setCameraPosition={setCameraPosition} />
                 <Model musicReady={musicReady} setMusicReady={setMusicReady} />
-                {/* @ts-ignore*/}
-                <ScrollControls distance={8} damping={10}>
-                    {scrollMode && <SetScrollPosition setCameraPosition={setCameraPosition} />}
-                    <ChangeCamera cameraPosition={cameraPosition} />
-                </ScrollControls>
+                <ChangeCamera cameraPosition={cameraPosition} />
+                <Billboard position={[-18, 4, 18]} >
+                    <Minimap scale={4}
+                        setCameraPosition={setCameraPosition}
+                    />
+                </Billboard>
                 <Environment
                     files="dikhololo_night_1k.hdr"
                     background
