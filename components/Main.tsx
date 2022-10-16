@@ -10,10 +10,14 @@ import { MinimapThumb } from './MinimapThumb';
 
 
 
-function ChangeCamera({ cameraPosition }) {
+function ChangeCamera({ cameraPosition, setCameraPosition, minimapClicked, setMinimapClicked, toggleMap }) {
     let targetCoordinates: [number, number, number];
     let orbitPoint: [number, number, number];
 
+    if (minimapClicked[1] === "yes") {
+        setCameraPosition(minimapClicked[0]);
+        toggleMap(false);
+    }
 
     if (cameraPosition === "start") {
         targetCoordinates = [-20, 5, 20];
@@ -35,6 +39,8 @@ function ChangeCamera({ cameraPosition }) {
         targetCoordinates = [-6, 5.5, -2];
         orbitPoint = [-4, 4.6, -5.5];
     }
+
+    setMinimapClicked(["start", "no"]);
 
 
     useFrame(state => {
@@ -108,6 +114,7 @@ function Main({ cameraPosition, setCameraPosition, scrollMode, setScrollMode }) 
     const [musicReady, setMusicReady] = useState(false);
     const [mapPosition, setMapPostition] = useState([-18, 4, 18]);
     const [showMap, toggleMap] = useState(true);
+    const [minimapClicked, setMinimapClicked] = useState(["start", "no"]);
 
     return (
         <div className='w-full h-screen'>
@@ -121,12 +128,10 @@ function Main({ cameraPosition, setCameraPosition, scrollMode, setScrollMode }) 
                 <pointLight color="white" intensity={1} position={[12.3, 1.9, 8.9]} distance={8} />
                 <TextComponents musicReady={musicReady} setMusicReady={setMusicReady} cameraPosition={cameraPosition} setCameraPosition={setCameraPosition} />
                 <Model musicReady={musicReady} setMusicReady={setMusicReady} />
-                <ChangeCamera cameraPosition={cameraPosition} />
+                <ChangeCamera cameraPosition={cameraPosition} setCameraPosition={setCameraPosition} minimapClicked={minimapClicked} setMinimapClicked={setMinimapClicked} toggleMap={toggleMap} />
                 {showMap &&
                     <Billboard position={[mapPosition[0], mapPosition[1], mapPosition[2]]} >
-                        <Minimap
-                            setCameraPosition={setCameraPosition}
-                        />
+                        <Minimap minimapClicked={minimapClicked} setMinimapClicked={setMinimapClicked} />
                     </Billboard>
                 }
                 <OpenMinimap cameraPosition={cameraPosition} showMap={showMap} toggleMap={toggleMap} setMapPostition={setMapPostition} />
