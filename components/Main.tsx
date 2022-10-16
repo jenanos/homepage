@@ -1,11 +1,12 @@
 import React, { Suspense, useState } from 'react'
-import { Canvas, useFrame } from '@react-three/fiber'
-import { Environment, Loader, PositionalAudio, Billboard } from '@react-three/drei';
+import { Canvas, useFrame, useThree } from '@react-three/fiber'
+import { Environment, Loader, PositionalAudio, Billboard, Text3D, Text } from '@react-three/drei';
 import { Model } from './Model';
 import TextComponents from './TextComponents';
 import * as THREE from 'three'
 import { Vector3 } from 'three';
 import { Minimap } from './Minimap';
+import { MinimapThumb } from './MinimapThumb';
 
 
 
@@ -52,9 +53,60 @@ function ChangeCamera({ cameraPosition }) {
     return null;
 }
 
+function OpenMinimap({ cameraPosition, showMap, toggleMap, setMapPostition }) {
+    let targetCoordinatesText: [number, number, number] = [-20, 5, 20];
+    let targetCoordinatesThumb: [number, number, number] = [-20, 5, 20];
+    let textSize: number = 0.1;
+
+    if (cameraPosition === "start") {
+        targetCoordinatesText = [-18.5, 3, 17.58];
+        targetCoordinatesThumb = [-18, 1.5, 17];
+        setMapPostition([-18, 4, 18]);
+    }
+    else if (cameraPosition === "about") {
+        targetCoordinatesText = [-9.5, 1.27, 12.1];
+        targetCoordinatesThumb = [-10, 1.82, 12.8];
+        setMapPostition([-8.8, 2, 12]);
+        textSize = 0.08;
+    }
+    else if (cameraPosition === "law") {
+        targetCoordinatesText = [1.4, 3.75, -3.7];
+        targetCoordinatesThumb = [0.92, 4.2, -3.75];
+        setMapPostition([2.25, 4.8, -2.5]);
+        textSize = 0.06;
+    }
+    else if (cameraPosition === "tech") {
+        targetCoordinatesText = [6.1, 1.57, 11.35];
+        targetCoordinatesThumb = [6.3, 1.57, 11.74];
+        setMapPostition([7.2, 2.5, 11]);
+        textSize = 0.07;
+    }
+    else if (cameraPosition === "music") {
+        targetCoordinatesText = [-5, 3, -4.5];
+        targetCoordinatesThumb = [-4.8, 3.8, -3.4];
+        setMapPostition([-4.8, 4.4, -4]);
+        textSize = 0.1;
+    }
+
+    return <group onClick={() => toggleMap(!showMap)}>
+        <Billboard position={[...targetCoordinatesText]}>
+            {/* @ts-ignore*/}
+            <Text color={'white'} maxWidth={2} fontSize={textSize}>
+                {'Trykk her for å\nskru av og på kartet:'}
+            </Text>
+        </Billboard>
+        <Billboard position={[...targetCoordinatesThumb]}>
+            <MinimapThumb scale={0.5} />
+        </Billboard>
+    </group>
+
+}
+
 
 function Main({ cameraPosition, setCameraPosition, scrollMode, setScrollMode }) {
     const [musicReady, setMusicReady] = useState(false);
+    const [mapPosition, setMapPostition] = useState([-18, 4, 18]);
+    const [showMap, toggleMap] = useState(true);
 
     return (
         <div className='w-full h-screen'>
@@ -69,11 +121,14 @@ function Main({ cameraPosition, setCameraPosition, scrollMode, setScrollMode }) 
                 <TextComponents musicReady={musicReady} setMusicReady={setMusicReady} cameraPosition={cameraPosition} setCameraPosition={setCameraPosition} />
                 <Model musicReady={musicReady} setMusicReady={setMusicReady} />
                 <ChangeCamera cameraPosition={cameraPosition} />
-                <Billboard position={[-18, 4, 18]} >
-                    <Minimap scale={4}
-                        setCameraPosition={setCameraPosition}
-                    />
-                </Billboard>
+                {showMap &&
+                    <Billboard position={[mapPosition[0], mapPosition[1], mapPosition[2]]} >
+                        <Minimap
+                            setCameraPosition={setCameraPosition}
+                        />
+                    </Billboard>
+                }
+                <OpenMinimap cameraPosition={cameraPosition} showMap={showMap} toggleMap={toggleMap} setMapPostition={setMapPostition} />
                 <Environment
                     files="dikhololo_night_1k.hdr"
                     background
