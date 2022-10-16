@@ -5,7 +5,7 @@ import Link from "next/link";
 import { AiOutlineClose, AiOutlineMail, AiOutlineMenu } from 'react-icons/ai';
 import { FaGithub, FaLinkedinIn } from 'react-icons/fa';
 
-function Navbar({ cameraPosition, setCameraPosition }) {
+function Navbar({ setCameraPosition, showMap, toggleMap }) {
   const [nav, setNav] = useState(false);
   const [navBg, setNavBg] = useState('#ecf0f3');
   const [shadow, setShadow] = useState(false);
@@ -25,9 +25,15 @@ function Navbar({ cameraPosition, setCameraPosition }) {
     window.addEventListener('scroll', handleShadow);
   }, []);
 
+  function setCamera(cameraName: string) {
+    setCameraPosition(cameraName);
+    toggleMap(false);
+  }
+
   function setCameraAndCloseNav(cameraName: string) {
     setCameraPosition(cameraName);
     setNav(false);
+    toggleMap(false);
   }
 
   return (
@@ -47,19 +53,19 @@ function Navbar({ cameraPosition, setCameraPosition }) {
           height='60'
           width='150'
           className="cursor-pointer"
-          onClick={() => setCameraPosition("start")} />
+          onClick={() => setCamera("start")} />
         <div>
           <ul className="hidden md:flex">
-            <li onClick={() => setCameraPosition("about")} className="ml-10 text-sm uppercase hover:border-b">
+            <li onClick={() => setCamera("about")} className="ml-10 text-sm uppercase hover:border-b">
               Om meg
             </li>
-            <li onClick={() => setCameraPosition("law")} className="ml-10 text-sm uppercase hover:border-b">
+            <li onClick={() => setCamera("law")} className="ml-10 text-sm uppercase hover:border-b">
               Juss
             </li>
-            <li onClick={() => setCameraPosition("tech")} className="ml-10 text-sm uppercase hover:border-b">
+            <li onClick={() => setCamera("tech")} className="ml-10 text-sm uppercase hover:border-b">
               Teknologi
             </li>
-            <li onClick={() => setCameraPosition("music")} className="ml-10 text-sm uppercase hover:border-b">
+            <li onClick={() => setCamera("music")} className="ml-10 text-sm uppercase hover:border-b">
               Musikk
             </li>
             <li className="ml-10 text-sm uppercase hover:border-b">

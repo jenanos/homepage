@@ -69,11 +69,6 @@ function TextComponents({ musicReady, setMusicReady, cameraPosition, setCameraPo
                     {'Spiller gitar i bandet Gete.\nVi er der du strømmer musikk!\n\nDu kan også klikke på radioen i tårnet.'}
                 </Text>
             </Billboard>
-            <Billboard position={[-18, 2.8, 17]}>
-                <Text color={'white'} maxWidth={3} anchorX="left">
-                    {'Se rundt:           venstreklikk/en finger\nPanorer:            høyreklikk/to fingre\nZoom:               scroll/klyp\nNytt kamera:    bruk meny eller trykk på tekstene'}
-                </Text>
-            </Billboard>
         </group>
     )
 }
