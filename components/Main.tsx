@@ -5,10 +5,7 @@ import { Model } from './Model';
 import TextComponents from './TextComponents';
 import * as THREE from 'three'
 import { Vector3 } from 'three';
-import { Minimap } from './Minimap';
-import { MinimapThumb } from './MinimapThumb';
 import OpenMinimap from './OpenMinimap';
-
 
 
 function ChangeCamera({ cameraPosition, setCameraPosition, minimapClicked, setMinimapClicked, toggleMap }) {
@@ -101,22 +98,12 @@ function AddOrbitControl(cameraPosition) {
 
 function Main({ cameraPosition, setCameraPosition, showMap, toggleMap }) {
     const [musicReady, setMusicReady] = useState(false);
-    const [mapPosition, setMapPostition] = useState([-18, 4, 18]);
-    const [mapLightPosition, setMapLightPostition] = useState([-18, 4, 18]);
     const [minimapClicked, setMinimapClicked] = useState(["start", false, true]);
 
     return (
         <div className='w-full h-screen'>
             <Canvas>
-                {showMap &&
-                    <group>
-                        <Billboard position={[mapPosition[0], mapPosition[1], mapPosition[2]]} >
-                            <Minimap minimapClicked={minimapClicked} setMinimapClicked={setMinimapClicked} />
-                        </Billboard>
-                        <pointLight color="orange" intensity={0.8} position={[mapLightPosition[0], mapLightPosition[1], mapLightPosition[2]]} distance={2} />
-                    </group>
-                }
-                {minimapClicked[2] && <OpenMinimap cameraPosition={cameraPosition} showMap={showMap} toggleMap={toggleMap} setMapPosition={setMapPostition} setMapLightPosition={setMapLightPostition} />}
+                <OpenMinimap cameraPosition={cameraPosition} showMap={showMap} toggleMap={toggleMap} minimapClicked={minimapClicked} setMinimapClicked={setMinimapClicked} />
                 {/* first street light */}
                 <pointLight color="orange" intensity={1} position={[-10.75, 2.94, 9.1]} distance={8} decay={2} />
                 {/* second street light */}
@@ -129,7 +116,7 @@ function Main({ cameraPosition, setCameraPosition, showMap, toggleMap }) {
                 {minimapClicked[2] &&
                     <ChangeCamera cameraPosition={cameraPosition} setCameraPosition={setCameraPosition} minimapClicked={minimapClicked} setMinimapClicked={setMinimapClicked} toggleMap={toggleMap} />
                 }
-                {!minimapClicked[2] && <AddOrbitControl cameraPosition={cameraPosition} />}
+                {/* {!minimapClicked[2] && <AddOrbitControl cameraPosition={cameraPosition} />} */}
                 <Environment
                     files="dikhololo_night_1k.hdr"
                     background
