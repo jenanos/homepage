@@ -50,12 +50,12 @@ function OpenMinimap({ cameraPosition, showMap, toggleMap, minimapClicked, setMi
         textSize = 0.1;
     }
 
-    if (minimapClicked[1] || !showMap) {
+    if (minimapClicked[1] || !showMap || !minimapClicked[2]) {
         mapPosition = [-18, 4, 18];
         mapLightPosition = [-18.2, 4.5, 18];
     }
 
-    setMinimapClicked([targetScene, false, true]);
+    setMinimapClicked([targetScene, false, minimapClicked[2]]);
 
     return (
 

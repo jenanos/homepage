@@ -38,14 +38,14 @@ function ChangeCamera({ cameraPosition, setCameraPosition, minimapClicked, setMi
         orbitPoint = [-4, 4.6, -5.5];
     }
 
-    setMinimapClicked(["start", false, true]);
+    setMinimapClicked(["start", false, minimapClicked[2]]);
 
 
     useFrame(state => {
         let camera = state.camera;
         if (targetCoordinates) {
             let targetVector: Vector3 = new THREE.Vector3(targetCoordinates[0], targetCoordinates[1], targetCoordinates[2]);
-            camera.position.lerp(targetVector, 0.03);
+            camera.position.lerp(targetVector, 0.05);
             camera.updateProjectionMatrix();
         }
         if (orbitPoint) {
@@ -56,45 +56,6 @@ function ChangeCamera({ cameraPosition, setCameraPosition, minimapClicked, setMi
 
     return null;
 }
-
-function AddOrbitControl(cameraPosition) {
-    const camera = useThree((state) => state.camera)
-    let orbitPoint: Vector3 = new THREE.Vector3(0, 0, 0);
-    let targetCoordinates: [number, number, number] = [-20, 5, 20];
-
-    if (cameraPosition === "start") {
-        targetCoordinates = [-20, 5, 20];
-        orbitPoint.set(0, 0, 0);
-    }
-    else if (cameraPosition === "about") {
-        targetCoordinates = [-11, 2.5, 13];
-        orbitPoint.set(-7.3, 2, 11.3);
-    }
-    else if (cameraPosition === "law") {
-        targetCoordinates = [0.6, 5.3, -4.6]
-        orbitPoint.set(3.5, 3.5, -1);
-    }
-    else if (cameraPosition === "tech") {
-        targetCoordinates = [5, 2.5, 12]
-        orbitPoint.set(10, 2, 9.6);
-    }
-    else if (cameraPosition === "music") {
-        targetCoordinates = [-6, 5.5, -2]
-        orbitPoint.set(-4, 4.6, -5.5);
-    }
-
-    camera.position.set(...targetCoordinates);
-
-    return <group>
-        <OrbitControls target={orbitPoint} />
-        <Billboard position={[-18, 2.3, 17]}>
-            <Text color={'white'} maxWidth={3} anchorX="left">
-                {'Se rundt:           venstreklikk/en finger\nPanorer:            høyreklikk/to fingre\nZoom:               scroll/klyp'}
-            </Text>
-        </Billboard>
-    </group>
-}
-
 
 function Main({ cameraPosition, setCameraPosition, showMap, toggleMap }) {
     const [musicReady, setMusicReady] = useState(false);
@@ -111,12 +72,18 @@ function Main({ cameraPosition, setCameraPosition, showMap, toggleMap }) {
                 <pointLight color="orange" intensity={1} position={[-3.3, 4.8, -5.4]} distance={2} />
                 <pointLight color="orange" intensity={1} position={[3.6, 4, -1]} distance={3} />
                 <pointLight color="white" intensity={1} position={[12.3, 1.9, 8.9]} distance={8} />
-                <TextComponents musicReady={musicReady} setMusicReady={setMusicReady} cameraPosition={cameraPosition} setCameraPosition={setCameraPosition} />
+                <TextComponents minimapClicked={minimapClicked} setMinimapClicked={setMinimapClicked} />
                 <Model musicReady={musicReady} setMusicReady={setMusicReady} />
                 {minimapClicked[2] &&
                     <ChangeCamera cameraPosition={cameraPosition} setCameraPosition={setCameraPosition} minimapClicked={minimapClicked} setMinimapClicked={setMinimapClicked} toggleMap={toggleMap} />
                 }
-                {/* {!minimapClicked[2] && <AddOrbitControl cameraPosition={cameraPosition} />} */}
+                {!minimapClicked[2] && <OrbitControls target={[0, 0, 0]} />}
+                {!minimapClicked[2] && <PerspectiveCamera makeDefault fov={75} position={[-20, 5, 20]} />}
+                {!minimapClicked[2] && <Billboard position={[-18, 2.3, 17]}>
+                    <Text color={'white'} maxWidth={3} anchorX="left">
+                        {'Se rundt:           venstreklikk/en finger\nPanorer:            høyreklikk/to fingre\nZoom:               scroll/klyp'}
+                    </Text>
+                </Billboard>}
                 <Environment
                     files="dikhololo_night_1k.hdr"
                     background
