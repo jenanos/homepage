@@ -7,9 +7,7 @@ import { useState } from 'react'
 
 
 const Home: NextPage = () => {
-
-  const [cameraPosition, setCameraPosition] = useState("start");
-  const [showMap, toggleMap] = useState(true);
+  const [minimapClicked, setMinimapClicked] = useState(["start", false, true]);
 
   return (
     <div>
@@ -18,8 +16,8 @@ const Home: NextPage = () => {
         <meta name="description" content="Jurist og teknolog. Jobber som seniorrådgiver i Digdir på dagen. Spiller gitar og koder om natten." />
         <link rel="icon" href="/jenslogo.ico" />
       </Head>
-      <Navbar setCameraPosition={setCameraPosition} showMap={showMap} toggleMap={toggleMap} />
-      <Main cameraPosition={cameraPosition} setCameraPosition={setCameraPosition} showMap={showMap} toggleMap={toggleMap} />
+      <Navbar minimapClicked={minimapClicked} setMinimapClicked={setMinimapClicked} />
+      <Main minimapClicked={minimapClicked} setMinimapClicked={setMinimapClicked} />
     </div>
   )
 }

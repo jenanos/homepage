@@ -1,11 +1,10 @@
 import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import NavImg from "../public/jenslogo.ico";
-import Link from "next/link";
 import { AiOutlineClose, AiOutlineMail, AiOutlineMenu } from 'react-icons/ai';
 import { FaGithub, FaLinkedinIn } from 'react-icons/fa';
 
-function Navbar({ setCameraPosition, showMap, toggleMap }) {
+function Navbar({ minimapClicked, setMinimapClicked }) {
   const [nav, setNav] = useState(false);
   const [navBg, setNavBg] = useState('#ecf0f3');
   const [shadow, setShadow] = useState(false);
@@ -26,14 +25,12 @@ function Navbar({ setCameraPosition, showMap, toggleMap }) {
   }, []);
 
   function setCamera(cameraName: string) {
-    setCameraPosition(cameraName);
-    toggleMap(false);
+    setMinimapClicked([cameraName, true, true]);
   }
 
   function setCameraAndCloseNav(cameraName: string) {
-    setCameraPosition(cameraName);
+    setMinimapClicked([cameraName, true, true]);
     setNav(false);
-    toggleMap(false);
   }
 
   return (

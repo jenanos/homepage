@@ -1,6 +1,6 @@
-import React, { Suspense, useState } from 'react'
-import { Canvas, useFrame, useThree } from '@react-three/fiber'
-import { Environment, Loader, PositionalAudio, Billboard, Text3D, Text, OrbitControls, PerspectiveCamera } from '@react-three/drei';
+import React, { useState } from 'react'
+import { Canvas, useFrame } from '@react-three/fiber'
+import { Environment, Loader, PositionalAudio, Billboard, Text, OrbitControls, PerspectiveCamera } from '@react-three/drei';
 import { Model } from './Model';
 import TextComponents from './TextComponents';
 import * as THREE from 'three'
@@ -57,9 +57,10 @@ function ChangeCamera({ cameraPosition, setCameraPosition, minimapClicked, setMi
     return null;
 }
 
-function Main({ cameraPosition, setCameraPosition, showMap, toggleMap }) {
+function Main({ minimapClicked, setMinimapClicked }) {
     const [musicReady, setMusicReady] = useState(false);
-    const [minimapClicked, setMinimapClicked] = useState(["start", false, true]);
+    const [showMap, toggleMap] = useState(true);
+    const [cameraPosition, setCameraPosition] = useState("start");
 
     return (
         <div className='w-full h-screen'>
