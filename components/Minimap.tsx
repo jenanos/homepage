@@ -35,7 +35,7 @@ export function Minimap({ minimapClicked, setMinimapClicked }) {
                 receiveShadow
                 geometry={nodes.Musikk.geometry}
                 material={nodes.Musikk.material}
-                position={[-0.16, 0.01, 0]}
+                position={[-0.17, 0, 0]}
                 rotation={[1.89, 0.35, -0.22]}
                 scale={0.04}
                 onClick={() => setMinimapClicked(["music", true, true])}
@@ -63,8 +63,37 @@ export function Minimap({ minimapClicked, setMinimapClicked }) {
             <mesh
                 castShadow
                 receiveShadow
-                geometry={nodes.kartutsnitt.geometry}
+                geometry={nodes.Om_meg_kart.geometry}
                 material={materials.kartutsnitt}
+                onClick={() => setMinimapClicked(["about", true, true])}
+            />
+            <mesh
+                castShadow
+                receiveShadow
+                geometry={nodes.Teknologi_kart.geometry}
+                material={materials.kartutsnitt}
+                onClick={() => setMinimapClicked(["tech", true, true])}
+            />
+            <mesh
+                castShadow
+                receiveShadow
+                geometry={nodes.Juss_kart.geometry}
+                material={materials.kartutsnitt}
+                onClick={() => setMinimapClicked(["law", true, true])}
+            />
+            <mesh
+                castShadow
+                receiveShadow
+                geometry={nodes.Musikk_kart.geometry}
+                material={materials.kartutsnitt}
+                onClick={() => setMinimapClicked(["music", true, true])}
+            />
+            <mesh
+                castShadow
+                receiveShadow
+                geometry={nodes.Styr_kamera_kart.geometry}
+                material={materials.kartutsnitt}
+                onClick={() => setMinimapClicked(["start", true, false])}
             />
         </group>
     );

@@ -33,7 +33,7 @@ export function MinimapThumb(props) {
                 receiveShadow
                 geometry={nodes.Musikk.geometry}
                 material={nodes.Musikk.material}
-                position={[-0.16, 0.01, 0]}
+                position={[-0.17, 0, 0]}
                 rotation={[1.89, 0.35, -0.22]}
                 scale={0.04}
             />
@@ -58,7 +58,31 @@ export function MinimapThumb(props) {
             <mesh
                 castShadow
                 receiveShadow
-                geometry={nodes.kartutsnitt.geometry}
+                geometry={nodes.Om_meg_kart.geometry}
+                material={materials.kartutsnitt}
+            />
+            <mesh
+                castShadow
+                receiveShadow
+                geometry={nodes.Teknologi_kart.geometry}
+                material={materials.kartutsnitt}
+            />
+            <mesh
+                castShadow
+                receiveShadow
+                geometry={nodes.Juss_kart.geometry}
+                material={materials.kartutsnitt}
+            />
+            <mesh
+                castShadow
+                receiveShadow
+                geometry={nodes.Musikk_kart.geometry}
+                material={materials.kartutsnitt}
+            />
+            <mesh
+                castShadow
+                receiveShadow
+                geometry={nodes.Styr_kamera_kart.geometry}
                 material={materials.kartutsnitt}
             />
         </group>
