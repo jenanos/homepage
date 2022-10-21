@@ -11,7 +11,7 @@ import OpenMinimap from './OpenMinimap';
 function ChangeCamera({ cameraPosition, setCameraPosition, minimapClicked, setMinimapClicked, toggleMap }) {
     let targetCoordinates: [number, number, number];
     let orbitPoint: [number, number, number];
-    let targetVector: Vector3;
+    let targetVector: Vector3 = new THREE.Vector3();
 
     if (minimapClicked[1]) {
         setCameraPosition(minimapClicked[0]);
@@ -42,7 +42,7 @@ function ChangeCamera({ cameraPosition, setCameraPosition, minimapClicked, setMi
     setMinimapClicked(["start", false, minimapClicked[2]]);
 
     if (targetCoordinates) {
-        targetVector = new THREE.Vector3(targetCoordinates[0], targetCoordinates[1], targetCoordinates[2]);
+        targetVector.set(targetCoordinates[0], targetCoordinates[1], targetCoordinates[2]);
     }
 
     useFrame((state, delta) => {
@@ -87,10 +87,7 @@ function Main({ minimapClicked, setMinimapClicked }) {
                         {'Se rundt:           venstreklikk/en finger\nPanorer:            høyreklikk/to fingre\nZoom:               scroll/klyp'}
                     </Text>
                 </Billboard>}
-                <Environment
-                    files="dikhololo_night_1k.hdr"
-                    background
-                />
+                <Environment files="dikhololo_night_1k.hdr" background />
                 <group position={[-4, 4.6, -5.5]}>
                     {musicReady && <PositionalAudio autoplay loop url="/stjernan.mp3" distance={3} />}
                 </group>
