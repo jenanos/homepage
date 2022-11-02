@@ -12,7 +12,7 @@ const Home: NextPage = () => {
   return (
     <div>
       <Head>
-        <title>Jens | Jurist og teknolog</title>
+        <title>Jens Andresen Osberg | Jurist og teknolog</title>
         <meta name="description" content="Jens Andresen Osberg. Jurist og teknolog. Jobber som seniorrådgiver i Digdir på dagen. Spiller gitar og koder om natten." />
         <link rel="icon" href="/jenslogo.ico" />
       </Head>
