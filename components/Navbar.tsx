@@ -11,6 +11,12 @@ type NavbarProps = {
   setMinimapState: MinimapStateSetter;
 };
 
+const NAV_LINK_CLASSES =
+  'inline-block text-sm uppercase text-[#1f2937] border-b-2 border-transparent px-1 py-2 transition-colors hover:border-[#1f2937] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#1f2937] bg-transparent';
+
+const MOBILE_LINK_CLASSES =
+  'py-4 text-sm text-[#1f2937] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#1f2937] bg-transparent';
+
 const Navbar = ({ setMinimapState }: NavbarProps) => {
   const [navOpen, setNavOpen] = useState(false);
   const [shadow, setShadow] = useState(false);
@@ -69,39 +75,39 @@ const Navbar = ({ setMinimapState }: NavbarProps) => {
         <button
           type="button"
           onClick={() => setCamera('start')}
-          className="cursor-pointer focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#1f2937]"
+          className="cursor-pointer focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#1f2937] bg-transparent"
           aria-label="Gå til startposisjonen"
         >
           <Image src={NavImg} alt="Icon av Jens" height={60} width={150} />
         </button>
         <div>
-          <ul className="hidden md:flex">
-            <li className="ml-10 text-sm uppercase hover:border-b">
-              <button type="button" onClick={() => setCamera('about')} className="focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#1f2937]">
+          <ul className="hidden md:flex items-center">
+            <li className="ml-10">
+              <button type="button" onClick={() => setCamera('about')} className={NAV_LINK_CLASSES}>
                 Om meg
               </button>
             </li>
-            <li className="ml-10 text-sm uppercase hover:border-b">
-              <button type="button" onClick={() => setCamera('law')} className="focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#1f2937]">
+            <li className="ml-10">
+              <button type="button" onClick={() => setCamera('law')} className={NAV_LINK_CLASSES}>
                 Juss
               </button>
             </li>
-            <li className="ml-10 text-sm uppercase hover:border-b">
-              <button type="button" onClick={() => setCamera('tech')} className="focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#1f2937]">
+            <li className="ml-10">
+              <button type="button" onClick={() => setCamera('tech')} className={NAV_LINK_CLASSES}>
                 Teknologi
               </button>
             </li>
-            <li className="ml-10 text-sm uppercase hover:border-b">
-              <button type="button" onClick={() => setCamera('music')} className="focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#1f2937]">
+            <li className="ml-10">
+              <button type="button" onClick={() => setCamera('music')} className={NAV_LINK_CLASSES}>
                 Musikk
               </button>
             </li>
-            <li className="ml-10 text-sm uppercase hover:border-b">
+            <li className="ml-10">
               <a
                 href="https://www.linkedin.com/in/jens-andresen-osberg-2a09ba99/"
                 target="_blank"
                 rel="noreferrer"
-                className="focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#1f2937]"
+                className={NAV_LINK_CLASSES}
               >
                 Ta kontakt
               </a>
@@ -111,7 +117,7 @@ const Navbar = ({ setMinimapState }: NavbarProps) => {
             type="button"
             style={{ color: '#1f2937' }}
             onClick={() => setNavOpen(true)}
-            className="md:hidden focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#1f2937]"
+            className="md:hidden focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#1f2937] bg-transparent"
             aria-expanded={navOpen}
             aria-controls="mobile-navigation"
             aria-label="Åpne meny"
@@ -134,7 +140,7 @@ const Navbar = ({ setMinimapState }: NavbarProps) => {
               <button
                 type="button"
                 onClick={() => setCameraAndCloseNav('start')}
-                className="focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#1f2937]"
+                className="bg-transparent focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#1f2937]"
                 aria-label="Gå til startposisjonen"
               >
                 <Image src={NavImg} width={87} height={35} alt="Icon av Jens" />
@@ -152,53 +158,53 @@ const Navbar = ({ setMinimapState }: NavbarProps) => {
               <button
                 type="button"
                 onClick={() => setCameraAndCloseNav('start')}
-                className="w-full text-left focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#1f2937]"
+                className="w-full text-left text-[#1f2937] py-4 bg-transparent focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#1f2937]"
               >
-                <p className="w-[85%] md:w-[90%] py-4">Jurist og teknolog</p>
+                Jurist og teknolog
               </button>
             </div>
           </div>
           <div className="py-4 flex flex-col">
             <ul className="uppercase">
-              <li className="py-4 text-sm">
+              <li>
                 <button
                   type="button"
                   onClick={() => setCameraAndCloseNav('about')}
-                  className="focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#1f2937]"
+                  className={MOBILE_LINK_CLASSES}
                 >
                   Om meg
                 </button>
               </li>
-              <li className="py-4 text-sm">
+              <li>
                 <button
                   type="button"
                   onClick={() => setCameraAndCloseNav('law')}
-                  className="focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#1f2937]"
+                  className={MOBILE_LINK_CLASSES}
                 >
                   Juss
                 </button>
               </li>
-              <li className="py-4 text-sm">
+              <li>
                 <button
                   type="button"
                   onClick={() => setCameraAndCloseNav('tech')}
-                  className="focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#1f2937]"
+                  className={MOBILE_LINK_CLASSES}
                 >
                   Teknologi
                 </button>
               </li>
-              <li className="py-4 text-sm">
+              <li>
                 <button
                   type="button"
                   onClick={() => setCameraAndCloseNav('music')}
-                  className="focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#1f2937]"
+                  className={MOBILE_LINK_CLASSES}
                 >
                   Musikk
                 </button>
               </li>
             </ul>
             <div className="pt-40">
-              <p className="uppercase tracking-widest text-[#561e5]">Ta kontakt!</p>
+              <p className="uppercase tracking-widest text-[#5651e5]">Ta kontakt!</p>
               <div className="flex items-center justify-between my-4 w-full sm:w-[80%]">
                 <a
                   href="https://www.linkedin.com/in/jens-andresen-osberg-2a09ba99/"
