@@ -1,8 +1,8 @@
 import { Billboard, Text } from '@react-three/drei';
 
 const TEXT_PROPS = {
-  fontSize: 0.14,
-  lineHeight: 1.15,
+  fontSize: 0.13,
+  lineHeight: 1.12,
 } as const;
 
 const TextComponents = () => (
