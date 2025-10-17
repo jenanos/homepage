@@ -4,7 +4,7 @@ A 3D homepage built with Next.js, React Three Fiber and Tailwind CSS. The scene 
 
 ## Prerequisites
 
-- Node.js 18.18 or newer (Next.js 14 requirement)
+- Node.js 18.18 or newer (Next.js 14 requirement, pinned via `.nvmrc`)
 - npm 9 or newer
 
 If you use `nvm` or another version manager, run `nvm use` before the commands below.
