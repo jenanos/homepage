@@ -148,8 +148,8 @@ const Main = ({ minimapState, setMinimapState }: MainProps) => {
           )}
           {!autoPilot && (
             <Billboard position={[-18, 2.3, 17]}>
-              <Text color="white" maxWidth={3} anchorX="left">
-                {`Se rundt:           venstreklikk/en finger\nPanorer:            høyreklikk/to fingre\nZoom:    scroll/klyp`}
+              <Text color="white" maxWidth={3} anchorX="left" anchorY="middle" fontSize={0.09} lineHeight={1.08}>
+                {`Se rundt: venstreklikk/en finger\nPanorer: høyreklikk/to fingre\nZoom: scroll/klyp`}
               </Text>
             </Billboard>
           )}
