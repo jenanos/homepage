@@ -1,100 +1,170 @@
-import React, { useState } from 'react'
-import { Canvas, useFrame } from '@react-three/fiber'
-import { Environment, Loader, PositionalAudio, Billboard, Text, OrbitControls, PerspectiveCamera } from '@react-three/drei';
-import { Model } from './Model';
-import TextComponents from './TextComponents';
-import * as THREE from 'three'
+import { Suspense, useEffect, useMemo, useRef, useState } from 'react';
+import { Canvas, useFrame } from '@react-three/fiber';
+import {
+  Billboard,
+  Environment,
+  Loader,
+  OrbitControls,
+  PerspectiveCamera,
+  PositionalAudio,
+  Text,
+} from '@react-three/drei';
+import type { CSSProperties, Dispatch, SetStateAction } from 'react';
 import { Vector3 } from 'three';
+import type { Vector3Tuple } from 'three';
+
 import OpenMinimap from './OpenMinimap';
+import TextComponents from './TextComponents';
+import { Model } from './Model';
+import type { CameraTarget, MinimapState, MinimapStateSetter } from '../types/minimap';
 
+const CAMERA_LERP_SPEED = 2;
 
-function ChangeCamera({ cameraPosition, setCameraPosition, minimapClicked, setMinimapClicked, toggleMap }) {
-    let targetCoordinates: [number, number, number];
-    let orbitPoint: [number, number, number];
-    let targetVector: Vector3 = new THREE.Vector3();
+const CAMERA_TARGETS: Record<CameraTarget, { position: Vector3Tuple; orbit: Vector3Tuple }> = {
+  start: { position: [-20, 5, 20] as Vector3Tuple, orbit: [0, 0, 0] as Vector3Tuple },
+  about: { position: [-11, 2.5, 13] as Vector3Tuple, orbit: [-7.3, 2, 11.3] as Vector3Tuple },
+  law: { position: [0.6, 5.3, -4.6] as Vector3Tuple, orbit: [3.5, 3.5, -1] as Vector3Tuple },
+  tech: { position: [5, 2.5, 12] as Vector3Tuple, orbit: [10, 2, 9.6] as Vector3Tuple },
+  music: { position: [-6, 5.5, -2] as Vector3Tuple, orbit: [-4, 4.6, -5.5] as Vector3Tuple },
+};
 
-    if (minimapClicked[1]) {
-        setCameraPosition(minimapClicked[0]);
-        toggleMap(false);
-    }
+const LOADER_STYLES: CSSProperties = {
+  background: '#6E350F',
+};
 
-    if (cameraPosition === "start") {
-        targetCoordinates = [-20, 5, 20];
-        orbitPoint = [0, 0, 0];
-    }
-    else if (cameraPosition === "about") {
-        targetCoordinates = [-11, 2.5, 13];
-        orbitPoint = [-7.3, 2, 11.3];
-    }
-    else if (cameraPosition === "law") {
-        targetCoordinates = [0.6, 5.3, -4.6];
-        orbitPoint = [3.5, 3.5, -1];
-    }
-    else if (cameraPosition === "tech") {
-        targetCoordinates = [5, 2.5, 12];
-        orbitPoint = [10, 2, 9.6];
-    }
-    else if (cameraPosition === "music") {
-        targetCoordinates = [-6, 5.5, -2];
-        orbitPoint = [-4, 4.6, -5.5];
-    }
+const AUDIO_POSITION: Vector3Tuple = [-4, 4.6, -5.5];
 
-    setMinimapClicked(["start", false, minimapClicked[2]]);
+const LOADER_MESSAGE = `Bruker litt tid, men er der straks.\nHopper plutselig til 100%`;
 
-    if (targetCoordinates) {
-        targetVector.set(targetCoordinates[0], targetCoordinates[1], targetCoordinates[2]);
-    }
-
-    useFrame((state, delta) => {
-        let camera = state.camera;
-        if (targetCoordinates) {
-            camera.position.lerp(targetVector, (2 * delta));
-            camera.updateProjectionMatrix();
-        }
-        if (orbitPoint) {
-            camera.lookAt(...orbitPoint);
-        }
-    })
-
-    return null;
+interface MainProps {
+  minimapState: MinimapState;
+  setMinimapState: MinimapStateSetter;
 }
 
-function Main({ minimapClicked, setMinimapClicked }) {
-    const [musicReady, setMusicReady] = useState(false);
-    const [showMap, toggleMap] = useState(true);
-    const [cameraPosition, setCameraPosition] = useState("start");
-
-    return (
-        <div className='w-full h-screen'>
-            <Canvas camera={{ position: [-10, 2, 10] }}>
-                <OpenMinimap cameraPosition={cameraPosition} showMap={showMap} toggleMap={toggleMap} minimapClicked={minimapClicked} setMinimapClicked={setMinimapClicked} />
-                {/* first street light */}
-                <pointLight color="orange" intensity={1} position={[-10.75, 2.94, 9.1]} distance={8} decay={2} />
-                {/* second street light */}
-                <pointLight color="orange" intensity={1} position={[-6.2, 3.2, 1.7]} distance={8} />
-                <pointLight color="orange" intensity={1} position={[-3.3, 4.8, -5.4]} distance={2} />
-                <pointLight color="orange" intensity={1} position={[3.6, 4, -1]} distance={3} />
-                <pointLight color="white" intensity={1} position={[12.3, 1.9, 8.9]} distance={8} />
-                <TextComponents />
-                <Model musicReady={musicReady} setMusicReady={setMusicReady} />
-                {minimapClicked[2] &&
-                    <ChangeCamera cameraPosition={cameraPosition} setCameraPosition={setCameraPosition} minimapClicked={minimapClicked} setMinimapClicked={setMinimapClicked} toggleMap={toggleMap} />
-                }
-                {!minimapClicked[2] && <OrbitControls target={[0, 0, 0]} />}
-                {!minimapClicked[2] && <PerspectiveCamera makeDefault fov={75} position={[-20, 5, 20]} />}
-                {!minimapClicked[2] && <Billboard position={[-18, 2.3, 17]}>
-                    <Text color={'white'} maxWidth={3} anchorX="left">
-                        {'Se rundt:           venstreklikk/en finger\nPanorer:            høyreklikk/to fingre\nZoom:               scroll/klyp'}
-                    </Text>
-                </Billboard>}
-                <Environment files="dikhololo_night_1k.hdr" background />
-                <group position={[-4, 4.6, -5.5]}>
-                    {musicReady && <PositionalAudio autoplay loop url="/stjernan.mp3" distance={3} />}
-                </group>
-            </Canvas>
-            <Loader containerStyles={{ background: '#6E350F', }} dataInterpolation={(p) => `${p.toFixed(2)}%\n Bruker litt tid, men er der straks.\nHopper plutselig til 100 `} />
-        </div>
-    )
+interface ChangeCameraProps {
+  cameraPosition: CameraTarget;
+  setCameraPosition: Dispatch<SetStateAction<CameraTarget>>;
+  minimapState: MinimapState;
+  setMinimapState: MinimapStateSetter;
+  toggleMap: Dispatch<SetStateAction<boolean>>;
 }
 
-export default Main
+const ChangeCamera = ({
+  cameraPosition,
+  setCameraPosition,
+  minimapState,
+  setMinimapState,
+  toggleMap,
+}: ChangeCameraProps) => {
+  const targetVector = useRef(new Vector3(...CAMERA_TARGETS.start.position));
+  const orbitVector = useRef(new Vector3(...CAMERA_TARGETS.start.orbit));
+  const currentTarget = useMemo(() => CAMERA_TARGETS[cameraPosition], [cameraPosition]);
+
+  useEffect(() => {
+    targetVector.current.fromArray(currentTarget.position);
+    orbitVector.current.fromArray(currentTarget.orbit);
+  }, [currentTarget]);
+
+  const { target, triggered } = minimapState;
+
+  useEffect(() => {
+    if (!triggered) {
+      return;
+    }
+
+    setCameraPosition(target);
+    toggleMap(false);
+    setMinimapState((state) => ({ ...state, triggered: false }));
+  }, [setCameraPosition, setMinimapState, target, toggleMap, triggered]);
+
+  useFrame(({ camera }, delta) => {
+    camera.position.lerp(targetVector.current, CAMERA_LERP_SPEED * delta);
+    camera.lookAt(orbitVector.current);
+  });
+
+  return null;
+};
+
+const Main = ({ minimapState, setMinimapState }: MainProps) => {
+  const [musicReady, setMusicReady] = useState(false);
+  const [showMap, setShowMap] = useState(true);
+  const [cameraPosition, setCameraPosition] = useState<CameraTarget>('start');
+  const { autoPilot, target, triggered } = minimapState;
+
+  useEffect(() => {
+    if (!triggered || autoPilot) {
+      return;
+    }
+
+    setCameraPosition(target);
+    setShowMap(false);
+    setMinimapState((state) => ({ ...state, triggered: false }));
+  }, [autoPilot, setCameraPosition, setMinimapState, target, triggered]);
+
+  useEffect(() => {
+    if (triggered) {
+      return;
+    }
+
+    setMinimapState((state) => {
+      if (state.target === cameraPosition && !state.triggered) {
+        return state;
+      }
+
+      return { ...state, target: cameraPosition, triggered: false };
+    });
+  }, [cameraPosition, setMinimapState, triggered]);
+
+  return (
+    <div className="w-full h-screen">
+      <Canvas camera={{ position: CAMERA_TARGETS.start.position }}>
+        <Suspense fallback={null}>
+          <OpenMinimap
+            cameraPosition={cameraPosition}
+            showMap={showMap}
+            toggleMap={setShowMap}
+            minimapState={minimapState}
+            setMinimapState={setMinimapState}
+          />
+          <pointLight color="orange" intensity={1} position={[-10.75, 2.94, 9.1]} distance={8} decay={2} />
+          <pointLight color="orange" intensity={1} position={[-6.2, 3.2, 1.7]} distance={8} />
+          <pointLight color="orange" intensity={1} position={[-3.3, 4.8, -5.4]} distance={2} />
+          <pointLight color="orange" intensity={1} position={[3.6, 4, -1]} distance={3} />
+          <pointLight color="white" intensity={1} position={[12.3, 1.9, 8.9]} distance={8} />
+          <TextComponents />
+          <Model musicReady={musicReady} setMusicReady={setMusicReady} />
+          {autoPilot && (
+            <ChangeCamera
+              cameraPosition={cameraPosition}
+              setCameraPosition={setCameraPosition}
+              minimapState={minimapState}
+              setMinimapState={setMinimapState}
+              toggleMap={setShowMap}
+            />
+          )}
+          {!autoPilot && <OrbitControls target={[0, 0, 0]} />}
+          {!autoPilot && (
+            <PerspectiveCamera makeDefault fov={75} position={CAMERA_TARGETS.start.position} />
+          )}
+          {!autoPilot && (
+            <Billboard position={[-18, 2.3, 17]}>
+              <Text color="white" maxWidth={3} anchorX="left">
+                {`Se rundt:           venstreklikk/en finger\nPanorer:            høyreklikk/to fingre\nZoom:    scroll/klyp`}
+              </Text>
+            </Billboard>
+          )}
+          <Environment files="dikhololo_night_1k.hdr" background />
+          <group position={AUDIO_POSITION}>
+            {musicReady && <PositionalAudio autoplay loop url="/stjernan.mp3" distance={3} />}
+          </group>
+        </Suspense>
+      </Canvas>
+      <Loader
+        containerStyles={LOADER_STYLES}
+        dataInterpolation={(progress) => `${progress.toFixed(0)}%\n${LOADER_MESSAGE}`}
+      />
+    </div>
+  );
+};
+
+export default Main;

@@ -1,34 +1,74 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Jens Andresen Osberg – Digital portfolio
 
-## Getting Started
+A 3D homepage built with Next.js, React Three Fiber and Tailwind CSS. The scene presents different focus areas (law, technology, music) and allows visitors to explore the island freely or jump directly to curated camera angles with a minimap.
 
-First, run the development server:
+## Prerequisites
+
+- Node.js 18.18 or newer (Next.js 14 requirement)
+- npm 9 or newer
+
+If you use `nvm` or another version manager, run `nvm use` before the commands below.
+
+## Getting started
+
+Install the dependencies and start the development server:
 
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000) to view the site. The page updates automatically when you edit the source files.
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+## Available scripts
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
+| Command        | Description                                                   |
+| -------------- | ------------------------------------------------------------- |
+| `npm run dev`  | Runs the Next.js development server with fast refresh.        |
+| `npm run build`| Builds the production bundle.                                 |
+| `npm run start`| Serves the production build.                                  |
+| `npm run lint` | Runs ESLint with the Next.js rules and TypeScript checks.     |
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+## Project structure
 
-## Learn More
+```
+.
+├── components/          # React components (3D scene, UI widgets)
+├── pages/               # Next.js pages and API routes
+├── public/              # Static assets (models, audio, favicon)
+├── styles/              # Global Tailwind styles
+├── types/               # Shared TypeScript definitions
+└── next.config.mjs      # Next.js configuration (React strict mode)
+```
 
-To learn more about Next.js, take a look at the following resources:
+### 3D scene
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+The 3D experience is powered by:
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+- [`@react-three/fiber`](https://docs.pmnd.rs/react-three-fiber/getting-started/introduction) for rendering Three.js in React.
+- [`@react-three/drei`](https://github.com/pmndrs/drei) utility helpers such as `Environment`, `OrbitControls`, `Text`, and `Loader`.
+- GLTF models exported from Blender and loaded with `useGLTF`.
 
-## Deploy on Vercel
+Key components:
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- `Main.tsx` orchestrates the canvas, camera transitions, and audio playback.
+- The canvas content is wrapped in `React.Suspense` so GLTF assets loaded with `useGLTF` follow the [recommended pattern from the React Three Fiber docs](https://r3f.docs.pmnd.rs/getting-started/introduction#first-steps).
+- `OpenMinimap.tsx` renders the contextual minimap and toggles between auto-pilot and manual camera control.
+- `Model.tsx` contains the island mesh hierarchy generated via [`gltfjsx`](https://github.com/pmndrs/gltfjsx).
+- `TextComponents.tsx` adds floating labels for each area of the island.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+## Coding standards
+
+- Strict TypeScript is enabled (`strict: true`) to surface type issues early.
+- Shared UI state lives in strongly typed helpers under `types/` (for example the minimap state machine).
+- Use the `triggerMinimapTarget` helper to keep minimap interactions in sync with camera transitions.
+- React state updates occur inside effects or callbacks, avoiding mutations during render.
+- ESLint uses the official Next.js configuration to enforce modern best practices.
+
+## Deployment
+
+The application targets the static Next.js output and can be deployed to any platform that supports Node.js (e.g. Vercel, Netlify). Run `npm run build` followed by `npm run start` to verify the production bundle locally before deploying.
+
+---
+
+Feel free to adapt the content, models, or styles to keep the site aligned with new accomplishments and visual direction.
