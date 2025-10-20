@@ -12,10 +12,10 @@ type NavbarProps = {
 };
 
 const NAV_LINK_CLASSES =
-  'inline-block text-sm uppercase text-[#1f2937] border-b-2 border-transparent px-1 py-2 transition-colors hover:border-[#1f2937] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#1f2937] bg-transparent';
+  'inline-block text-sm uppercase text-[#1f2937] border-b-2 border-transparent px-1 py-2 transition-colors hover:border-[#1f2937] focus-visible:outline-solid focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#1f2937] bg-transparent';
 
 const MOBILE_LINK_CLASSES =
-  'py-4 text-sm text-[#1f2937] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#1f2937] bg-transparent';
+  'py-4 text-sm text-[#1f2937] focus-visible:outline-solid focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#1f2937] bg-transparent';
 
 const Navbar = ({ setMinimapState }: NavbarProps) => {
   const [navOpen, setNavOpen] = useState(false);
@@ -66,7 +66,7 @@ const Navbar = ({ setMinimapState }: NavbarProps) => {
     };
   }, [navOpen]);
 
-  const baseNavClasses = 'fixed w-full h-24 z-[100]';
+  const baseNavClasses = 'fixed w-full h-24 z-100';
   const navClasses = shadow ? `${baseNavClasses} shadow-xl` : baseNavClasses;
 
   return (
@@ -75,7 +75,7 @@ const Navbar = ({ setMinimapState }: NavbarProps) => {
         <button
           type="button"
           onClick={() => setCamera('start')}
-          className="cursor-pointer focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#1f2937] bg-transparent"
+          className="cursor-pointer focus-visible:outline-solid focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#1f2937] bg-transparent"
           aria-label="Gå til startposisjonen"
         >
           <Image src={NavImg} alt="Icon av Jens" height={60} width={150} />
@@ -117,7 +117,7 @@ const Navbar = ({ setMinimapState }: NavbarProps) => {
             type="button"
             style={{ color: '#1f2937' }}
             onClick={() => setNavOpen(true)}
-            className="md:hidden focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#1f2937] bg-transparent"
+            className="md:hidden focus-visible:outline-solid focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#1f2937] bg-transparent"
             aria-expanded={navOpen}
             aria-controls="mobile-navigation"
             aria-label="Åpne meny"
@@ -132,7 +132,7 @@ const Navbar = ({ setMinimapState }: NavbarProps) => {
           className={
             navOpen
               ? 'fixed left-0 top-0 w-[75%] sm:w-[60%] md:w-[45%] h-screen bg-[#ecf0f3] p-10 ease-in duration-500'
-              : 'fixed left-[-100%] top-0 p-10 ease-in duration-500'
+              : 'fixed -left-full top-0 p-10 ease-in duration-500'
           }
         >
           <div>
@@ -140,7 +140,7 @@ const Navbar = ({ setMinimapState }: NavbarProps) => {
               <button
                 type="button"
                 onClick={() => setCameraAndCloseNav('start')}
-                className="bg-transparent focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#1f2937]"
+                className="bg-transparent focus-visible:outline-solid focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#1f2937]"
                 aria-label="Gå til startposisjonen"
               >
                 <Image src={NavImg} width={87} height={35} alt="Icon av Jens" />
@@ -148,7 +148,7 @@ const Navbar = ({ setMinimapState }: NavbarProps) => {
               <button
                 type="button"
                 onClick={() => setNavOpen(false)}
-                className="rounded-full shadow-lg shadow-gray-400 p-3 cursor-pointer hover:scale-105 ease-in duration-300 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#1f2937]"
+                className="rounded-full shadow-lg shadow-gray-400 p-3 cursor-pointer hover:scale-105 ease-in duration-300 focus-visible:outline-solid focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#1f2937]"
                 aria-label="Lukk meny"
               >
                 <AiOutlineClose />
@@ -158,7 +158,7 @@ const Navbar = ({ setMinimapState }: NavbarProps) => {
               <button
                 type="button"
                 onClick={() => setCameraAndCloseNav('start')}
-                className="w-full text-left text-[#1f2937] py-4 bg-transparent focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#1f2937]"
+                className="w-full text-left text-[#1f2937] py-4 bg-transparent focus-visible:outline-solid focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#1f2937]"
               >
                 Jurist og teknolog
               </button>
@@ -210,7 +210,7 @@ const Navbar = ({ setMinimapState }: NavbarProps) => {
                   href="https://www.linkedin.com/in/jens-andresen-osberg-2a09ba99/"
                   target="_blank"
                   rel="noreferrer"
-                  className="rounded-full shadow-lg shadow-gray-400 p-3 cursor-pointer hover:scale-105 ease-in duration-300 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#1f2937]"
+                  className="rounded-full shadow-lg shadow-gray-400 p-3 cursor-pointer hover:scale-105 ease-in duration-300 focus-visible:outline-solid focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#1f2937]"
                   aria-label="LinkedIn"
                 >
                   <FaLinkedinIn />
@@ -219,7 +219,7 @@ const Navbar = ({ setMinimapState }: NavbarProps) => {
                   href="https://github.com/jenanos"
                   target="_blank"
                   rel="noreferrer"
-                  className="rounded-full shadow-lg shadow-gray-400 p-3 cursor-pointer hover:scale-105 ease-in duration-300 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#1f2937]"
+                  className="rounded-full shadow-lg shadow-gray-400 p-3 cursor-pointer hover:scale-105 ease-in duration-300 focus-visible:outline-solid focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#1f2937]"
                   aria-label="GitHub"
                 >
                   <FaGithub />
@@ -228,7 +228,7 @@ const Navbar = ({ setMinimapState }: NavbarProps) => {
                   href="mailto:jens.osberg@gmail.com"
                   target="_blank"
                   rel="noreferrer"
-                  className="rounded-full shadow-lg shadow-gray-400 p-3 cursor-pointer hover:scale-105 ease-in duration-300 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#1f2937]"
+                  className="rounded-full shadow-lg shadow-gray-400 p-3 cursor-pointer hover:scale-105 ease-in duration-300 focus-visible:outline-solid focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#1f2937]"
                   aria-label="Send e-post"
                   onClick={() => setNavOpen(false)}
                 >
