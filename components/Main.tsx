@@ -1,14 +1,6 @@
 import { Suspense, useEffect, useMemo, useRef, useState } from 'react';
 import { Canvas, useFrame } from '@react-three/fiber';
-import {
-  Billboard,
-  Environment,
-  Loader,
-  OrbitControls,
-  PerspectiveCamera,
-  PositionalAudio,
-  Text,
-} from '@react-three/drei';
+import { Environment, Loader, OrbitControls, PerspectiveCamera, PositionalAudio } from '@react-three/drei';
 import type { CSSProperties, Dispatch, SetStateAction } from 'react';
 import { Vector3 } from 'three';
 import type { Vector3Tuple } from 'three';
@@ -89,7 +81,10 @@ const Main = ({ minimapState, setMinimapState }: MainProps) => {
   const [musicReady, setMusicReady] = useState(false);
   const [showMap, setShowMap] = useState(true);
   const [cameraPosition, setCameraPosition] = useState<CameraTarget>('start');
+  const [cameraInstructionsVisible, setCameraInstructionsVisible] = useState(false);
   const { autoPilot, target, triggered } = minimapState;
+
+  const previousAutoPilot = useRef(autoPilot);
 
   useEffect(() => {
     if (!triggered || autoPilot) {
@@ -100,6 +95,16 @@ const Main = ({ minimapState, setMinimapState }: MainProps) => {
     setShowMap(false);
     setMinimapState((state) => ({ ...state, triggered: false }));
   }, [autoPilot, setCameraPosition, setMinimapState, target, triggered]);
+
+  useEffect(() => {
+    if (autoPilot) {
+      setCameraInstructionsVisible(false);
+    } else if (previousAutoPilot.current) {
+      setCameraInstructionsVisible(true);
+    }
+
+    previousAutoPilot.current = autoPilot;
+  }, [autoPilot]);
 
   useEffect(() => {
     if (triggered) {
@@ -116,7 +121,7 @@ const Main = ({ minimapState, setMinimapState }: MainProps) => {
   }, [cameraPosition, setMinimapState, triggered]);
 
   return (
-    <div className="w-full h-screen">
+    <div className="relative w-full h-screen">
       <Canvas camera={{ position: CAMERA_TARGETS.start.position }}>
         <Suspense fallback={null}>
           <OpenMinimap
@@ -146,19 +151,39 @@ const Main = ({ minimapState, setMinimapState }: MainProps) => {
           {!autoPilot && (
             <PerspectiveCamera makeDefault fov={75} position={CAMERA_TARGETS.start.position} />
           )}
-          {!autoPilot && (
-            <Billboard position={[-18, 2.3, 17]}>
-              <Text color="white" maxWidth={3} anchorX="left" anchorY="middle" fontSize={0.09} lineHeight={1.08}>
-                {`Se rundt: venstreklikk/en finger\nPanorer: høyreklikk/to fingre\nZoom: scroll/klyp`}
-              </Text>
-            </Billboard>
-          )}
           <Environment files="dikhololo_night_1k.hdr" background />
           <group position={AUDIO_POSITION}>
             {musicReady && <PositionalAudio autoplay loop url="/stjernan.mp3" distance={3} />}
           </group>
         </Suspense>
       </Canvas>
+      {!autoPilot && cameraInstructionsVisible && (
+        <div className="absolute top-4 right-4 max-w-xs rounded-lg bg-black/80 p-4 text-white shadow-lg">
+          <div className="flex items-start gap-3">
+            <p className="text-sm leading-relaxed whitespace-pre-line">
+              {`Se rundt: venstreklikk/en finger\nPanorer: høyreklikk/to fingre\nZoom: scroll/klyp`}
+            </p>
+            <button
+              type="button"
+              onClick={() => setCameraInstructionsVisible(false)}
+              className="ml-auto text-white/70 transition hover:text-white"
+              aria-label="Lukk kamerainstruksjoner"
+            >
+              ×
+            </button>
+          </div>
+        </div>
+      )}
+      {!autoPilot && !cameraInstructionsVisible && (
+        <button
+          type="button"
+          onClick={() => setCameraInstructionsVisible(true)}
+          className="absolute top-4 right-4 flex h-10 w-10 items-center justify-center rounded-full bg-black/80 text-lg font-semibold text-white shadow-lg transition hover:bg-black/70"
+          aria-label="Vis kamerainstruksjoner"
+        >
+          ?
+        </button>
+      )}
       <Loader
         containerStyles={LOADER_STYLES}
         dataInterpolation={(progress) => `${progress.toFixed(0)}%\n${LOADER_MESSAGE}`}
