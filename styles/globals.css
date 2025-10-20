@@ -1,7 +1,6 @@
 @import 'tailwindcss';
 
-@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@100;200;300;400;500;600;700;800;900&display=swap')
-layer(utilities);
+/* Google Fonts moved to _document.tsx */
 
 /*
   The default border color has changed to `currentcolor` in Tailwind CSS v4,
@@ -12,6 +11,7 @@ layer(utilities);
   color utility to any element that depends on these defaults.
 */
 @layer base {
+
   *,
   ::after,
   ::before,
@@ -24,7 +24,7 @@ layer(utilities);
 @layer utilities {
   html {
     scroll-behavior: smooth;
-    font-family: 'Raleway', sans-serif;
+    font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Noto Sans", "Helvetica Neue", Arial, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
   }
 }
 
@@ -43,7 +43,7 @@ layer(utilities);
   }
 
   h1 {
-    @apply text-4xl sm:text-5xl md:text-6xl font-[Raleway];
+    @apply text-4xl sm:text-5xl md:text-6xl;
   }
 
   h2 {

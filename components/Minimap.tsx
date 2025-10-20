@@ -1,14 +1,9 @@
 import { useGLTF } from '@react-three/drei';
-import type { GLTF } from 'three-stdlib';
-import type { Material, Mesh } from 'three';
 
 import type { CameraTarget, MinimapStateSetter } from '../types/minimap';
 import { triggerMinimapTarget } from '../types/minimap';
 
-type MinimapGLTF = GLTF & {
-  nodes: Record<string, Mesh>;
-  materials: Record<string, Material>;
-};
+import type { MinimapGLTF } from './models/MinimapGLB';
 
 type MinimapProps = {
   setMinimapState: MinimapStateSetter;
@@ -23,6 +18,7 @@ const handleSelection = (
 };
 
 export function Minimap({ setMinimapState }: MinimapProps) {
+  // @ts-expect-error drei returns GLTF & ObjectMap; gltfjsx provides refined typings for our asset
   const { nodes, materials } = useGLTF('/minimap.glb') as MinimapGLTF;
 
   return (

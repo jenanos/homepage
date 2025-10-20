@@ -1,16 +1,11 @@
 import { useGLTF } from '@react-three/drei';
 import type { ThreeElements } from '@react-three/fiber';
-import type { GLTF } from 'three-stdlib';
-import type { Material, Mesh } from 'three';
-
-type MinimapGLTF = GLTF & {
-  nodes: Record<string, Mesh>;
-  materials: Record<string, Material>;
-};
+import type { MinimapGLTF } from './models/MinimapGLB';
 
 type MinimapThumbProps = ThreeElements['group'];
 
 export function MinimapThumb(props: MinimapThumbProps) {
+  // @ts-expect-error drei returns GLTF & ObjectMap; gltfjsx provides refined typings for our asset
   const { nodes, materials } = useGLTF('/minimap.glb') as MinimapGLTF;
 
   return (
