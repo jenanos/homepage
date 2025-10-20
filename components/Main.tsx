@@ -5,9 +5,9 @@ import type { CSSProperties, Dispatch, SetStateAction } from 'react';
 import { Vector3 } from 'three';
 import type { Vector3Tuple } from 'three';
 
-import OpenMinimap from './OpenMinimap';
+import MinimapOverlay from './MinimapOverlay';
 import TextComponents from './TextComponents';
-import { Model } from './Model';
+import { SceneModel } from './SceneModel';
 import type { CameraTarget, MinimapState, MinimapStateSetter } from '../types/minimap';
 
 const CAMERA_LERP_SPEED = 2;
@@ -124,7 +124,7 @@ const Main = ({ minimapState, setMinimapState }: MainProps) => {
     <div className="relative w-full h-screen">
       <Canvas camera={{ position: CAMERA_TARGETS.start.position }}>
         <Suspense fallback={null}>
-          <OpenMinimap
+          <MinimapOverlay
             cameraPosition={cameraPosition}
             showMap={showMap}
             toggleMap={setShowMap}
@@ -137,7 +137,7 @@ const Main = ({ minimapState, setMinimapState }: MainProps) => {
           <pointLight color="orange" intensity={1} position={[3.6, 4, -1]} distance={3} />
           <pointLight color="white" intensity={1} position={[12.3, 1.9, 8.9]} distance={8} />
           <TextComponents />
-          <Model musicReady={musicReady} setMusicReady={setMusicReady} />
+          <SceneModel musicReady={musicReady} setMusicReady={setMusicReady} />
           {autoPilot && (
             <ChangeCamera
               cameraPosition={cameraPosition}
