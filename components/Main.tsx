@@ -158,7 +158,7 @@ const Main = ({ minimapState, setMinimapState }: MainProps) => {
         </Suspense>
       </Canvas>
       {!autoPilot && cameraInstructionsVisible && (
-        <div className="absolute top-4 right-4 max-w-xs rounded-lg bg-black/80 p-4 text-white shadow-lg">
+        <div className="absolute top-28 right-4 max-w-xs rounded-lg bg-black/80 p-4 text-white shadow-lg">
           <div className="flex items-start gap-3">
             <p className="text-sm leading-relaxed whitespace-pre-line">
               {`Se rundt: venstreklikk/en finger\nPanorer: høyreklikk/to fingre\nZoom: scroll/klyp`}
@@ -178,7 +178,7 @@ const Main = ({ minimapState, setMinimapState }: MainProps) => {
         <button
           type="button"
           onClick={() => setCameraInstructionsVisible(true)}
-          className="absolute top-4 right-4 flex h-10 w-10 items-center justify-center rounded-full bg-black/80 text-lg font-semibold text-white shadow-lg transition hover:bg-black/70"
+          className="absolute top-28 right-4 flex h-10 w-10 items-center justify-center rounded-full bg-black/80 text-lg font-semibold text-white shadow-lg transition hover:bg-black/70"
           aria-label="Vis kamerainstruksjoner"
         >
           ?
