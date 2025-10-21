@@ -1,74 +1,96 @@
-# Jens Andresen Osberg – Digital portfolio
+# 🌍 Jens Andresen Osberg — Interactive 3D Portfolio
 
-A 3D homepage built with Next.js, React Three Fiber and Tailwind CSS. The scene presents different focus areas (law, technology, music) and allows visitors to explore the island freely or jump directly to curated camera angles with a minimap.
+This repository contains the code for Jens Andresen Osberg's 3D homepage. The site is built with Next.js 15, React 19, and React Three Fiber to guide visitors through law, technology, and music highlights on a stylised island.
 
-## Prerequisites
+## 🧭 Feature Tour
+- **Guided camera tours** driven by a minimap with curated targets (`about`, `law`, `tech`, `music`) and an auto-pilot toggle.
+- **Hands-on exploration** that hands control back to the visitor using `<OrbitControls>` when auto-pilot is turned off.
+- **Ambient storytelling** via positional audio (`/public/stjernan.mp3`) once the island scene signals it is ready.
+- **Accessible navigation** with keyboard-friendly menus, skip-to-start buttons, and semantic labelling for screen readers.
+- **Optimised loading flow** that wraps models in `React.Suspense`, shows the Drei `Loader`, and gradually fades in lighting.
 
-- Node.js 18.18 or newer (Next.js 14 requirement, pinned via `.nvmrc`)
-- npm 9 or newer
+## 🛠️ Tech Stack
+| Layer | Details |
+| --- | --- |
+| Framework | [Next.js 15](https://nextjs.org/) with the Pages Router |
+| UI & State | React 19, TypeScript (strict mode) |
+| 3D Rendering | `@react-three/fiber`, `@react-three/drei`, `three` |
+| Styling | Tailwind CSS 4 with global overrides in `styles/globals.css` |
+| Icons & Media | `react-icons`, custom GLB models exported via [`gltfjsx`](https://github.com/pmndrs/gltfjsx) |
 
-If you use `nvm` or another version manager, run `nvm use` before the commands below.
+## 🚀 Getting Started
+1. Ensure Node.js `>=18 <25` (the range enforced in `package.json`).
+2. Install dependencies and start the dev server:
 
-## Getting started
+   ```bash
+   npm install
+   npm run dev
+   ```
 
-Install the dependencies and start the development server:
+3. Visit [http://localhost:3000](http://localhost:3000). Changes are hot-reloaded.
 
-```bash
-npm install
-npm run dev
-```
+> **Tip:** An `.nvmrc` file is provided—run `nvm use` if you manage Node versions with `nvm`.
 
-Open [http://localhost:3000](http://localhost:3000) to view the site. The page updates automatically when you edit the source files.
+## 📦 Available Scripts
+| Command | Description |
+| --- | --- |
+| `npm run dev` | Start the Next.js development server with Fast Refresh. |
+| `npm run build` | Create an optimised production bundle. |
+| `npm run start` | Serve the production build locally (after `npm run build`). |
+| `npm run lint` | Run ESLint using the Next.js + TypeScript configuration. |
 
-## Available scripts
-
-| Command        | Description                                                   |
-| -------------- | ------------------------------------------------------------- |
-| `npm run dev`  | Runs the Next.js development server with fast refresh.        |
-| `npm run build`| Builds the production bundle.                                 |
-| `npm run start`| Serves the production build.                                  |
-| `npm run lint` | Runs ESLint with the Next.js rules and TypeScript checks.     |
-
-## Project structure
-
+## 🧱 Project Structure
 ```
 .
-├── components/          # React components (3D scene, UI widgets)
-├── pages/               # Next.js pages and API routes
-├── public/              # Static assets (models, audio, favicon)
-├── styles/              # Global Tailwind styles
-├── types/               # Shared TypeScript definitions
-└── next.config.mjs      # Next.js configuration (React strict mode)
+├── components/          # Scene orchestration, minimap controls, navigation, and 3D text
+│   ├── Main.tsx         # Sets up the <Canvas>, camera logic, and audio lifecycle
+│   ├── Navbar.tsx       # Fixed navigation that triggers minimap targets
+│   ├── SceneModel.tsx   # Island composition that forwards music readiness
+│   ├── TextComponents.tsx
+│   ├── MinimapOverlay.tsx
+│   ├── MinimapInteractive.tsx
+│   ├── MinimapThumbnail.tsx
+│   └── models/          # gltfjsx generated components & types
+├── pages/
+│   ├── _app.tsx         # Tailwind + global layout wiring
+│   └── index.tsx        # Renders <Navbar/> and <Main/> with the initial minimap state
+├── public/              # GLB assets, HDR environment map, audio, and favicon
+├── styles/              # Tailwind entrypoint with base style overrides
+├── types/               # Shared TypeScript contracts (e.g., minimap state)
+└── next.config.mjs      # Next.js configuration
 ```
 
-### 3D scene
+### 🎯 Key Modules
+- `types/minimap.ts` centralises the `MinimapState`, `CameraTarget`, and the `triggerMinimapTarget` helper.
+- `components/SceneModel.tsx` imports generated geometry from `components/models` to render the island and emit a callback when textures are ready.
+- `components/Main.tsx` manages camera lerping, minimap toggling, Suspense fallbacks, and audio playback.
+- `components/MinimapOverlay.tsx` positions the interactive minimap in 3D space and displays a thumbnail toggle when relevant.
 
-The 3D experience is powered by:
+### 🗺️ Minimap Interaction
+- Desktop navigation buttons in `Navbar.tsx` call `triggerMinimapTarget` to jump the camera and optionally switch auto-pilot off.
+- When auto-pilot is disabled, visitors can orbit freely; the current target is still synchronised so the minimap highlights remain accurate.
+- Re-enabling auto-pilot (by clicking a minimap region) recenters the camera and hides manual controls.
 
-- [`@react-three/fiber`](https://docs.pmnd.rs/react-three-fiber/getting-started/introduction) for rendering Three.js in React.
-- [`@react-three/drei`](https://github.com/pmndrs/drei) utility helpers such as `Environment`, `OrbitControls`, `Text`, and `Loader`.
-- GLTF models exported from Blender and loaded with `useGLTF`.
+## 🎨 Assets & Tooling
+- Update GLB files under `public/` and regenerate the corresponding React components with:
+  ```bash
+  npx gltfjsx public/my-island.glb -t -o components/models/SceneModel.generated.tsx
+  npx gltfjsx public/minimap.glb -t -o components/models/MinimapModel.generated.tsx
+  ```
+- The generated files should keep the `// @ts-nocheck` pragma and exported type names (`SceneGLTF`, `MinimapGLTF`).
+- HDR environments (e.g., `dikhololo_night_1k.hdr`) live in `public/` and are referenced in `Main.tsx` via Drei's `<Environment />`.
 
-Key components:
+## ✅ Deployment Checklist
+1. Run `npm run lint` to ensure the project passes static analysis.
+2. Build the production bundle locally:
 
-- `Main.tsx` orchestrates the canvas, camera transitions, and audio playback.
-- The canvas content is wrapped in `React.Suspense` so GLTF assets loaded with `useGLTF` follow the [recommended pattern from the React Three Fiber docs](https://r3f.docs.pmnd.rs/getting-started/introduction#first-steps).
-- `OpenMinimap.tsx` renders the contextual minimap and toggles between auto-pilot and manual camera control.
-- `Model.tsx` contains the island mesh hierarchy generated via [`gltfjsx`](https://github.com/pmndrs/gltfjsx).
-- `TextComponents.tsx` adds floating labels for each area of the island.
+   ```bash
+   npm run build
+   npm run start
+   ```
 
-## Coding standards
-
-- Strict TypeScript is enabled (`strict: true`) to surface type issues early.
-- Shared UI state lives in strongly typed helpers under `types/` (for example the minimap state machine).
-- Use the `triggerMinimapTarget` helper to keep minimap interactions in sync with camera transitions.
-- React state updates occur inside effects or callbacks, avoiding mutations during render.
-- ESLint uses the official Next.js configuration to enforce modern best practices.
-
-## Deployment
-
-The application targets the static Next.js output and can be deployed to any platform that supports Node.js (e.g. Vercel, Netlify). Run `npm run build` followed by `npm run start` to verify the production bundle locally before deploying.
+3. Deploy to any Node-compatible host (Vercel, Netlify, self-managed server). The project expects static assets to remain in `public/`.
 
 ---
 
-Feel free to adapt the content, models, or styles to keep the site aligned with new accomplishments and visual direction.
+Questions or improvements? Feel free to open an issue or adjust the scene to reflect new milestones—enjoy exploring the island! 🏝️
