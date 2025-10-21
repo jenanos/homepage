@@ -2,6 +2,9 @@
   "name": "homepage",
   "version": "0.1.0",
   "private": true,
+  "engines": {
+    "node": ">=18 <25"
+  },
   "scripts": {
     "dev": "next dev",
     "build": "next build",
@@ -9,25 +12,26 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@react-three/drei": "^9.19.5",
-    "@react-three/fiber": "^8.2.2",
-    "next": "12.2.3",
-    "react": "18.2.0",
-    "react-dom": "18.2.0",
-    "react-icons": "^4.4.0",
-    "three": "^0.143.0"
+    "@react-three/drei": "10.7.6",
+    "@react-three/fiber": "9.4.0",
+    "next": "^15.5.6",
+    "react": "19.2.0",
+    "react-dom": "19.2.0",
+    "react-icons": "^5.5.0",
+    "three": "^0.180.0"
   },
   "devDependencies": {
-    "@types/node": "18.6.3",
-    "@types/react": "18.0.15",
-    "@types/react-dom": "18.0.6",
-    "@types/three": "^0.143.0",
-    "autoprefixer": "^10.4.8",
-    "eslint": "8.21.0",
-    "eslint-config-next": "12.2.3",
-    "next-transpile-modules": "^9.0.0",
-    "postcss": "^8.4.14",
-    "tailwindcss": "^3.1.7",
-    "typescript": "4.7.4"
+    "@tailwindcss/postcss": "^4.1.14",
+    "@types/node": "24.8.1",
+    "@types/react": "19.2.2",
+    "@types/react-dom": "19.2.2",
+    "@types/three": "^0.180.0",
+    "eslint": "9.38.0",
+    "eslint-config-next": "15.5.6",
+    "gltfjsx": "^6.5.3",
+    "postcss": "^8.5.6",
+    "tailwindcss": "^4.1.14",
+    "three-stdlib": "^2.36.0",
+    "typescript": "^5.9.3"
   }
 }
