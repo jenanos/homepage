@@ -34,18 +34,17 @@ export function MinimapHelpDialog({
         <DialogHeader>
           <DialogTitle>Få oversikt med minimappet</DialogTitle>
           <DialogDescription>
-            Minimappet lar deg hoppe mellom områdene på øya. Du kan slå det av når du vil utforske på egenhånd, og slå det på igjen
-            når du trenger oversikten.
+            Hopp raskt mellom områdene ved å trykke på minimappet. Du kan slå det av når du vil styre kameraet selv.
           </DialogDescription>
         </DialogHeader>
         <div className="flex flex-col gap-4">
-          <div className="overflow-hidden rounded-xl border border-white/10 bg-black/40">
-            <Canvas camera={{ position: [0, 1.4, 3.2], fov: 30 }} dpr={[1, 2]}>
+          <div className="h-64 overflow-hidden rounded-xl border border-white/10 bg-black/40 sm:h-72">
+            <Canvas camera={{ position: [0, 1.05, 2.2], fov: 32 }} dpr={[1, 2]}>
               <color attach="background" args={['#050505']} />
               <ambientLight intensity={0.6} />
               <directionalLight position={[2, 3, 4]} intensity={0.9} />
               <Suspense fallback={null}>
-                <group rotation={[-0.3, 0.35, 0]} position={[0, -0.5, 0]} scale={0.4}>
+                <group rotation={[-0.32, 0.35, 0]} position={[0, -0.34, 0]} scale={0.58}>
                   <MinimapInteractive
                     setMinimapState={setMinimapState}
                     onRegionSelect={() => onOpenChange(false)}
@@ -55,12 +54,7 @@ export function MinimapHelpDialog({
             </Canvas>
           </div>
           <div className="rounded-lg bg-white/5 p-4 text-sm leading-relaxed text-white/80">
-            <p className="font-semibold text-white">Tips</p>
-            <ul className="mt-2 space-y-1 list-disc pl-5">
-              <li>Trykk på de ulike områdene for å flytte kameraet automatisk.</li>
-              <li>Slå av minimappet når du vil styre kameraet fritt.</li>
-              <li>Du kan alltid åpne denne hjelpen igjen fra knappen nederst på siden.</li>
-            </ul>
+            <p>Trykk på et område for å flytte kameraet dit, eller slå av minimappet for fri utforsking.</p>
           </div>
         </div>
         <DialogFooter>
