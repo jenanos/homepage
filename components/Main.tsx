@@ -6,6 +6,7 @@ import { Vector3 } from 'three';
 import type { Vector3Tuple } from 'three';
 
 import MinimapOverlay from './MinimapOverlay';
+import { MinimapHelpDialog } from './MinimapHelpDialog';
 import TextComponents from './TextComponents';
 import { SceneModel } from './SceneModel';
 import type { CameraTarget, MinimapState, MinimapStateSetter } from '../types/minimap';
@@ -38,7 +39,6 @@ interface ChangeCameraProps {
   setCameraPosition: Dispatch<SetStateAction<CameraTarget>>;
   minimapState: MinimapState;
   setMinimapState: MinimapStateSetter;
-  toggleMap: Dispatch<SetStateAction<boolean>>;
 }
 
 const ChangeCamera = ({
@@ -46,7 +46,6 @@ const ChangeCamera = ({
   setCameraPosition,
   minimapState,
   setMinimapState,
-  toggleMap,
 }: ChangeCameraProps) => {
   const targetVector = useRef(new Vector3(...CAMERA_TARGETS.start.position));
   const orbitVector = useRef(new Vector3(...CAMERA_TARGETS.start.orbit));
@@ -65,9 +64,8 @@ const ChangeCamera = ({
     }
 
     setCameraPosition(target);
-    toggleMap(false);
     setMinimapState((state) => ({ ...state, triggered: false }));
-  }, [setCameraPosition, setMinimapState, target, toggleMap, triggered]);
+  }, [setCameraPosition, setMinimapState, target, triggered]);
 
   useFrame(({ camera }, delta) => {
     camera.position.lerp(targetVector.current, CAMERA_LERP_SPEED * delta);
@@ -79,12 +77,13 @@ const ChangeCamera = ({
 
 const Main = ({ minimapState, setMinimapState }: MainProps) => {
   const [musicReady, setMusicReady] = useState(false);
-  const [showMap, setShowMap] = useState(true);
   const [cameraPosition, setCameraPosition] = useState<CameraTarget>('start');
   const [cameraInstructionsVisible, setCameraInstructionsVisible] = useState(false);
+  const [minimapHelpOpen, setMinimapHelpOpen] = useState(true);
   const { autoPilot, target, triggered } = minimapState;
 
   const previousAutoPilot = useRef(autoPilot);
+  const hasAutoClosedHelp = useRef(false);
 
   useEffect(() => {
     if (!triggered || autoPilot) {
@@ -92,9 +91,38 @@ const Main = ({ minimapState, setMinimapState }: MainProps) => {
     }
 
     setCameraPosition(target);
-    setShowMap(false);
     setMinimapState((state) => ({ ...state, triggered: false }));
   }, [autoPilot, setCameraPosition, setMinimapState, target, triggered]);
+
+  useEffect(() => {
+    if (minimapHelpOpen) {
+      setCameraInstructionsVisible(false);
+    }
+  }, [minimapHelpOpen]);
+
+  useEffect(() => {
+    if (cameraPosition === 'start' || hasAutoClosedHelp.current) {
+      return;
+    }
+
+    setMinimapHelpOpen(false);
+    hasAutoClosedHelp.current = true;
+    setCameraInstructionsVisible(true);
+  }, [cameraPosition]);
+
+  useEffect(() => {
+    if (minimapHelpOpen || !autoPilot || triggered) {
+      return;
+    }
+
+    setMinimapState((state) => {
+      if (!state.autoPilot || state.triggered) {
+        return state;
+      }
+
+      return { ...state, autoPilot: false };
+    });
+  }, [autoPilot, minimapHelpOpen, setMinimapState, triggered]);
 
   useEffect(() => {
     if (autoPilot) {
@@ -126,8 +154,6 @@ const Main = ({ minimapState, setMinimapState }: MainProps) => {
         <Suspense fallback={null}>
           <MinimapOverlay
             cameraPosition={cameraPosition}
-            showMap={showMap}
-            toggleMap={setShowMap}
             minimapState={minimapState}
             setMinimapState={setMinimapState}
           />
@@ -144,7 +170,6 @@ const Main = ({ minimapState, setMinimapState }: MainProps) => {
               setCameraPosition={setCameraPosition}
               minimapState={minimapState}
               setMinimapState={setMinimapState}
-              toggleMap={setShowMap}
             />
           )}
           {!autoPilot && <OrbitControls target={[0, 0, 0]} />}
@@ -188,6 +213,30 @@ const Main = ({ minimapState, setMinimapState }: MainProps) => {
         containerStyles={LOADER_STYLES}
         dataInterpolation={(progress) => `${progress.toFixed(0)}%\n${LOADER_MESSAGE}`}
       />
+      <MinimapHelpDialog
+        open={minimapHelpOpen}
+        onOpenChange={(open) => {
+          setMinimapHelpOpen(open);
+          if (!open) {
+            hasAutoClosedHelp.current = true;
+            if (!autoPilot) {
+              setCameraInstructionsVisible(true);
+            }
+          } else {
+            setCameraInstructionsVisible(false);
+          }
+        }}
+        setMinimapState={setMinimapState}
+      />
+      {!minimapHelpOpen && (
+        <button
+          type="button"
+          onClick={() => setMinimapHelpOpen(true)}
+          className="fixed bottom-6 left-1/2 z-50 -translate-x-1/2 rounded-full bg-white/10 px-5 py-2 text-sm font-semibold text-white shadow-lg backdrop-blur transition hover:bg-white/20 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/60"
+        >
+          Vis kart-hjelp
+        </button>
+      )}
     </div>
   );
 };
