@@ -37,21 +37,19 @@ const MAP_LAYOUT: Record<CameraTarget, {
 
 type MinimapOverlayProps = {
   cameraPosition: CameraTarget;
-  showMap: boolean;
   minimapState: MinimapState;
   setMinimapState: MinimapStateSetter;
 };
 
 const MinimapOverlay = ({
   cameraPosition,
-  showMap,
   minimapState,
   setMinimapState,
 }: MinimapOverlayProps) => {
   const layout = useMemo(() => MAP_LAYOUT[cameraPosition], [cameraPosition]);
 
   const { autoPilot, triggered } = minimapState;
-  const shouldResetPosition = triggered || !showMap || !autoPilot;
+  const shouldResetPosition = triggered || !autoPilot;
   const mapPosition = shouldResetPosition ? DEFAULT_MAP_POSITION : layout.mapPosition;
   const lightPosition = shouldResetPosition ? DEFAULT_LIGHT_POSITION : layout.lightPosition;
 

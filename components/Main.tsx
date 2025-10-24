@@ -39,7 +39,6 @@ interface ChangeCameraProps {
   setCameraPosition: Dispatch<SetStateAction<CameraTarget>>;
   minimapState: MinimapState;
   setMinimapState: MinimapStateSetter;
-  setShowMap: Dispatch<SetStateAction<boolean>>;
 }
 
 const ChangeCamera = ({
@@ -47,7 +46,6 @@ const ChangeCamera = ({
   setCameraPosition,
   minimapState,
   setMinimapState,
-  setShowMap,
 }: ChangeCameraProps) => {
   const targetVector = useRef(new Vector3(...CAMERA_TARGETS.start.position));
   const orbitVector = useRef(new Vector3(...CAMERA_TARGETS.start.orbit));
@@ -66,9 +64,8 @@ const ChangeCamera = ({
     }
 
     setCameraPosition(target);
-    setShowMap(false);
     setMinimapState((state) => ({ ...state, triggered: false }));
-  }, [setCameraPosition, setMinimapState, target, setShowMap, triggered]);
+  }, [setCameraPosition, setMinimapState, target, triggered]);
 
   useFrame(({ camera }, delta) => {
     camera.position.lerp(targetVector.current, CAMERA_LERP_SPEED * delta);
@@ -80,7 +77,6 @@ const ChangeCamera = ({
 
 const Main = ({ minimapState, setMinimapState }: MainProps) => {
   const [musicReady, setMusicReady] = useState(false);
-  const [showMap, setShowMap] = useState(true);
   const [cameraPosition, setCameraPosition] = useState<CameraTarget>('start');
   const [cameraInstructionsVisible, setCameraInstructionsVisible] = useState(false);
   const [minimapHelpOpen, setMinimapHelpOpen] = useState(true);
@@ -95,9 +91,14 @@ const Main = ({ minimapState, setMinimapState }: MainProps) => {
     }
 
     setCameraPosition(target);
-    setShowMap(false);
     setMinimapState((state) => ({ ...state, triggered: false }));
   }, [autoPilot, setCameraPosition, setMinimapState, target, triggered]);
+
+  useEffect(() => {
+    if (minimapHelpOpen) {
+      setCameraInstructionsVisible(false);
+    }
+  }, [minimapHelpOpen]);
 
   useEffect(() => {
     if (cameraPosition === 'start' || hasAutoClosedHelp.current) {
@@ -106,7 +107,22 @@ const Main = ({ minimapState, setMinimapState }: MainProps) => {
 
     setMinimapHelpOpen(false);
     hasAutoClosedHelp.current = true;
+    setCameraInstructionsVisible(true);
   }, [cameraPosition]);
+
+  useEffect(() => {
+    if (minimapHelpOpen || !autoPilot || triggered) {
+      return;
+    }
+
+    setMinimapState((state) => {
+      if (!state.autoPilot || state.triggered) {
+        return state;
+      }
+
+      return { ...state, autoPilot: false };
+    });
+  }, [autoPilot, minimapHelpOpen, setMinimapState, triggered]);
 
   useEffect(() => {
     if (autoPilot) {
@@ -138,7 +154,6 @@ const Main = ({ minimapState, setMinimapState }: MainProps) => {
         <Suspense fallback={null}>
           <MinimapOverlay
             cameraPosition={cameraPosition}
-            showMap={showMap}
             minimapState={minimapState}
             setMinimapState={setMinimapState}
           />
@@ -155,7 +170,6 @@ const Main = ({ minimapState, setMinimapState }: MainProps) => {
               setCameraPosition={setCameraPosition}
               minimapState={minimapState}
               setMinimapState={setMinimapState}
-              setShowMap={setShowMap}
             />
           )}
           {!autoPilot && <OrbitControls target={[0, 0, 0]} />}
@@ -205,10 +219,13 @@ const Main = ({ minimapState, setMinimapState }: MainProps) => {
           setMinimapHelpOpen(open);
           if (!open) {
             hasAutoClosedHelp.current = true;
+            if (!autoPilot) {
+              setCameraInstructionsVisible(true);
+            }
+          } else {
+            setCameraInstructionsVisible(false);
           }
         }}
-        showMap={showMap}
-        setShowMap={setShowMap}
         setMinimapState={setMinimapState}
       />
       {!minimapHelpOpen && (
