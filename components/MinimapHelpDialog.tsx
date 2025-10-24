@@ -30,14 +30,16 @@ export function MinimapHelpDialog({
           <div className="aspect-[5/4] w-full">
             <Canvas
               style={{ width: '100%', height: '100%' }}
-              camera={{ position: [0.08, 0.72, 1.45], fov: 26 }}
+              camera={{ position: [0.02, 1.08, 1.88], fov: 34 }}
               dpr={[1, 2]}
             >
               <color attach="background" args={['#130805']} />
-              <ambientLight intensity={0.7} />
-              <directionalLight position={[2.2, 3.2, 4]} intensity={1} />
+              <ambientLight intensity={0.85} />
+              <directionalLight position={[1.8, 2.6, 3.4]} intensity={0.85} />
+              <pointLight position={[0.6, 1.6, 1.35]} intensity={1.8} color="#ffd8a8" distance={5} />
+              <pointLight position={[-0.7, 1.4, 1.45]} intensity={1.4} color="#ffe7c2" distance={5} />
               <Suspense fallback={null}>
-                <group rotation={[-0.3, 0.32, 0]} position={[0.02, -0.16, 0.04]} scale={0.92}>
+                <group rotation={[-0.24, 0.28, 0.02]} position={[0.01, -0.24, 0.08]} scale={0.78}>
                   <MinimapInteractive
                     setMinimapState={setMinimapState}
                     onRegionSelect={() => onOpenChange(false)}
