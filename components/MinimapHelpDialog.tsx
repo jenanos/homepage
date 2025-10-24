@@ -10,16 +10,24 @@ import {
   DialogHeader,
   DialogTitle,
 } from './ui/dialog';
-import { MinimapThumbnail } from './MinimapThumbnail';
+import { MinimapInteractive } from './MinimapInteractive';
+import type { MinimapStateSetter } from '../types/minimap';
 
 interface MinimapHelpDialogProps {
   open: boolean;
   onOpenChange: (open: boolean) => void;
   showMap: boolean;
   setShowMap: Dispatch<SetStateAction<boolean>>;
+  setMinimapState: MinimapStateSetter;
 }
 
-export function MinimapHelpDialog({ open, onOpenChange, showMap, setShowMap }: MinimapHelpDialogProps) {
+export function MinimapHelpDialog({
+  open,
+  onOpenChange,
+  showMap,
+  setShowMap,
+  setMinimapState,
+}: MinimapHelpDialogProps) {
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent>
@@ -32,12 +40,16 @@ export function MinimapHelpDialog({ open, onOpenChange, showMap, setShowMap }: M
         </DialogHeader>
         <div className="flex flex-col gap-4">
           <div className="overflow-hidden rounded-xl border border-white/10 bg-black/40">
-            <Canvas camera={{ position: [0, 0, 2.5], fov: 35 }} dpr={[1, 2]}>
-              <ambientLight intensity={0.7} />
-              <directionalLight position={[2, 3, 4]} intensity={0.8} />
+            <Canvas camera={{ position: [0, 1.4, 3.2], fov: 30 }} dpr={[1, 2]}>
+              <color attach="background" args={['#050505']} />
+              <ambientLight intensity={0.6} />
+              <directionalLight position={[2, 3, 4]} intensity={0.9} />
               <Suspense fallback={null}>
-                <group rotation={[0.15, 0.4, 0]} scale={2} position={[0, -0.3, 0]}>
-                  <MinimapThumbnail />
+                <group rotation={[-0.3, 0.35, 0]} position={[0, -0.5, 0]} scale={0.4}>
+                  <MinimapInteractive
+                    setMinimapState={setMinimapState}
+                    onRegionSelect={() => onOpenChange(false)}
+                  />
                 </group>
               </Suspense>
             </Canvas>

@@ -209,6 +209,7 @@ const Main = ({ minimapState, setMinimapState }: MainProps) => {
         }}
         showMap={showMap}
         setShowMap={setShowMap}
+        setMinimapState={setMinimapState}
       />
       {!minimapHelpOpen && (
         <button
