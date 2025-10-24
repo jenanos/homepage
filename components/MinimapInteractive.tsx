@@ -1,6 +1,7 @@
 import { useMemo, useState } from 'react';
 import { useGLTF } from '@react-three/drei';
 import type { ThreeElements } from '@react-three/fiber';
+import { Vector3 } from 'three';
 
 import type { CameraTarget, MinimapStateSetter } from '../types/minimap';
 import { triggerMinimapTarget } from '../types/minimap';
@@ -46,7 +47,15 @@ const scaleWithHover = (
     return scale.map((value) => value * multiplier) as typeof scale;
   }
 
-  return scale * multiplier;
+  if (typeof scale === 'number') {
+    return scale * multiplier;
+  }
+
+  if (scale instanceof Vector3) {
+    return scale.clone().multiplyScalar(multiplier);
+  }
+
+  return scale;
 };
 
 const setCursor = (cursor: string) => {
